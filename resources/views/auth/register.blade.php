@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Password</strong></label>
-                                            < <input id="password-confirm" type="password" class="form-control"
+                                            <input id="password-confirm" type="password" class="form-control"
                                                 name="password_confirmation" required autocomplete="new-password"
                                                 value="password">
 
