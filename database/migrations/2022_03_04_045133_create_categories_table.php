@@ -17,8 +17,8 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('category_name', 50);
+            $table->string('category_image');
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

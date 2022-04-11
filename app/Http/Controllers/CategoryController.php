@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
@@ -35,11 +36,24 @@ class CategoryController extends Controller
         //     'category_name.unique' => 'Category Name Already Ace',
 
         // ]);
-        Category::insert([
+        $category_id = Category::insertGetId([
             'user_id' => Auth::id(),
             'category_name' => $request->category_name,
+            'category_image' => 'image',
             'created_at' => Carbon::now(),
         ]);
+        // $category_id = 1;
+        $uploaded_file = $request->category_image;
+        // echo $uploaded_file;
+        $extention = $uploaded_file->getClientOriginalExtension();
+        // echo $extention;
+        $file_name = $category_id . '.' . $extention;
+        // echo $file_name;
+        Image::make($uploaded_file)->resize(680, 680)->save(public_path('/uploads/category/' . $file_name));
+        Category::find($category_id)->update([
+            'category_image' => $file_name,
+        ]);
+
         return back()->with('success_msg', 'Category Add Sucessfully!!');
     }
 
@@ -55,12 +69,40 @@ class CategoryController extends Controller
     public function updateCategory(Request $request)
     {
         // print_r($request->all());
-        Category::find($request->id)->update([
-            // 'user_id' => Auth::id(),
-            'category_name' => $request->category_name,
-            'updated_at' => Carbon::now(),
+        if ($request->category_image) {
 
-        ]);
+            $category_id = $request->id;
+            $category_info = Category::find($category_id);
+            // echo $category_info->category_image;
+            // die();
+            $unlink_id = public_path('/uploads/category/' . $category_info->category_image);
+            unlink($unlink_id);
+
+            $uploaded_file = $request->category_image;
+            // echo $uploaded_file;
+            $extention = $uploaded_file->getClientOriginalExtension();
+            // echo $extention;
+            $file_name = $request->id . '.' . $extention;
+            Image::make($uploaded_file)->resize(680, 680)->save(public_path('/uploads/category/' . $file_name));
+
+            Category::find($request->id)->update([
+                // 'user_id' => Auth::id(),
+                'category_name' => $request->category_name,
+                'category_image' => $file_name,
+                'updated_at' => Carbon::now(),
+
+            ]);
+        } else {
+
+
+
+            Category::find($request->id)->update([
+                // 'user_id' => Auth::id(),
+                'category_name' => $request->category_name,
+                'updated_at' => Carbon::now(),
+
+            ]);
+        }
         return redirect('/add/category')->with('update', 'Category Update Sucessfully!!');
     }
 

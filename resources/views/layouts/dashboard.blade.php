@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{{ asset('backend/vendor/chartist/css/chartist.min.css') }}">
     <link href="{{ asset('backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
+    <!-- Datatable -->
+    <link href="{{ asset('backend/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link href="{{ asset('backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
@@ -867,7 +871,7 @@
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="javascript:void(0)" role="button"
                                     data-toggle="dropdown">
-                                    <img src=" {{ asset('uploads/users') }}/{{ Auth::user()->profile_photo }} "
+                                    <img src=" {{ asset('/uploads/users') }}/{{ Auth::user()->profile_photo }} "
                                         width="20" alt="" />
                                     <div class="header-info">
                                         <span class="text-black"><strong>{{ Auth::user()->name }}
@@ -949,8 +953,30 @@
                             <span class="nav-text">Category</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('add.category') }}">Category List</a></li>
-                            {{-- <li><a href="{{ route('category.edit') }}">Category Edit</a></li> --}}
+                            <li><a href="{{ route('category') }}">Category List</a></li>
+                            <li><a href="{{ route('subCategory') }}">Sub Category List</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="flaticon-381-networking"></i>
+                            <span class="nav-text">Product</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('product') }}">Add Product</a></li>
+                            <li><a href="{{ route('product.list') }}">Product List</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="flaticon-381-networking"></i>
+                            <span class="nav-text">Inventory</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            {{-- <li><a href="{{ route('add.inventory') }}">Add Inventory</a></li> --}}
+                            <li><a href="{{ route('add.color.size') }}">Add Color & Size</a></li>
 
                         </ul>
                     </li>
@@ -1022,6 +1048,9 @@
 
     <!-- Dashboard 1 -->
     <script src="{{ asset('backend/js/dashboard/dashboard-1.js') }}"></script>
+    <!-- Datatable -->
+    <script src="{{ asset('backend/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/js/plugins-init/datatables.init.js') }}"></script>
     <script>
         function carouselReview() {
             /*  testimonial one function by = owl.carousel.js */
@@ -1065,6 +1094,28 @@
         });
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- all insert code --}}
+    @if (session('success_msg'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_msg') }}'
+            })
+        </script>
+    @endif
 
     {{-- all update code --}}
 

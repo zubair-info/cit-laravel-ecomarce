@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Image;
+use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -79,28 +79,15 @@ class HomeController extends Controller
     public  function passwordUpdate(Request $request)
     {
         $request->validate([
-
             'old_password' => 'required',
             'password' => 'required',
+            'password_confirmation' => 'required',
             'password' =>  Password::min(8)
-                ->mixedCase()
                 ->letters()
+                ->mixedCase()
                 ->numbers()
                 ->symbols(),
             'password' => 'confirmed',
-
-
-
-            // 'password' => [
-            //     'required',
-            //     'confirmed',
-            //     Password::min(8)
-            //         ->mixedCase()
-            //         ->letters()
-            //         ->numbers()
-            //         ->symbols()
-            //         ->uncompromised(),
-            // ],
 
         ]);
         if (Hash::check($request->old_password, Auth::user()->password)) {

@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
 @section('content')
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Category</a></li>
+        </ol>
+    </div>
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
@@ -8,18 +14,29 @@
                     {{-- <h3 class="float-end">Count: <span></span></h3> --}}
                 </div>
                 <div class="card-body">
-                    @if (session('success_msg'))
+                    {{-- @if (session('success_msg'))
                         <div class="alert alert-success">
                             {{ session('success_msg') }}
                         </div>
-                    @endif
-                    <form action="{{ url('/category/insert') }} " method="post">
+                    @endif --}}
+                    <form action="{{ url('/category/insert') }} " method="post" enctype="multipart/form-data">
                         @csrf
+
+
                         <div class="form-group mb-4">
                             <label for="" class="form-label">Category Name</label>
 
                             <input type="text" name="category_name" class="form-control">
                             @error('category_name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="" class="form-label">Category Image</label>
+
+                            <input type="file" name="category_image" class="form-control">
+                            @error('category_image')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
 
@@ -42,58 +59,67 @@
                 <div class="card-body">
                     <form action=" {{ url('/markSoft/delete') }} " method="POST">
                         @csrf
-                        <table class="table table-bordered">
 
-                            <thead>
-                                <tr>
-                                    {{-- <label class="custom-control-label" for="checkAll"></label> --}}
-                                    <th><input type="checkbox" id="checkAll"></th>
-                                    <th>SL</th>
-                                    <th>Category Name</th>
-                                    <th>Added By</th>
-                                    <th>Create at</th>
-                                    <th>Action</th>
 
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($all_category as $key => $category)
-                                    <tr class="{{ $loop->odd ? 'text-danger' : 'text-success' }}">
-                                        <td><input type="checkbox" name="mark[]" value=" {{ $category->id }} "></td>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $category->category_name }}</td>
-                                        {{-- <td>{{ $category->user_id }}</td> --}}
-
-                                        <td>
-                                            @php
-                                                if (App\Models\User::where('id', $category->user_id)->exists()) {
-                                                    echo $category->rel_to_user->name;
-                                                } else {
-                                                    echo 'N/A';
-                                                }
-                                            @endphp
-                                        </td>
-                                        <td>{{ $category->created_at->diffForHumans() }}</td>
-                                        <td>
-                                            {{-- {{ route('category.delete', $category->id) }} --}}
-                                            <div class="d-flex">
-                                                <a href="{{ route('category.edit', $category->id) }}"
-                                                    class="btn btn-primary shadow btn-xs sharp mr-1"><i
-                                                        class="fa fa-pencil"></i></a>
-
-                                                <button name="{{ route('categorySoft.delete', $category->id) }}"
-                                                    type="button" class="delete_btn btn btn-danger shadow btn-xs sharp"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-
-                                        </td>
+                        <div class="table-responsive">
+                            <table id="example4" class="display min-w850">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="checkAll"></th>
+                                        <th>SL</th>
+                                        <th>Category Name</th>
+                                        <th>Category Image</th>
+                                        <th>Added By</th>
+                                        <th>Create at</th>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
+                                </thead>
 
-                            </tbody>
-                        </table>
-                        <button type="submit" class="button btn btn-danger btn-xs">Delete</button>
+                                <tbody>
+                                    @foreach ($all_category as $key => $category)
+                                        <tr class="{{ $loop->odd ? 'text-danger' : 'text-success' }}">
+                                            <td><input type="checkbox" class="checkAllmark" id="checkAllmark"
+                                                    name="mark[]" value=" {{ $category->id }} "></td>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $category->category_name }}</td>
+                                            {{-- <td>{{ $category->user_id }}</td> --}}
+                                            <td><img src="{{ asset('/uploads/category/') }}/{{ $category->category_image }}"
+                                                    height="90px" alt=""></td>
+
+                                            <td>
+                                                @php
+                                                    if (App\Models\User::where('id', $category->user_id)->exists()) {
+                                                        echo $category->rel_to_user->name;
+                                                    } else {
+                                                        echo 'N/A';
+                                                    }
+                                                @endphp
+                                            </td>
+                                            <td>{{ $category->created_at->diffForHumans() }}</td>
+                                            <td>
+                                                {{-- {{ route('category.delete', $category->id) }} --}}
+                                                <div class="d-flex">
+                                                    <a href="{{ route('category.edit', $category->id) }}"
+                                                        class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                            class="fa fa-pencil"></i></a>
+
+                                                    <button name="{{ route('categorySoft.delete', $category->id) }}"
+                                                        type="button"
+                                                        class="delete_btn btn btn-danger shadow btn-xs sharp"><i
+                                                            class="fa fa-trash"></i></button>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+
+                            </table>
+                            <button type="submit" class="button btn btn-danger btn-xs">Delete</button>
+
+                        </div>
+
+
                     </form>
 
                 </div>
@@ -141,7 +167,7 @@
 
                                 <td>
                                     @php
-                                        if (App\Models\User::where('id', $category->user_id)->exists()) {
+                                        if (App\Models\User::where('id', $trash->user_id)->exists()) {
                                             echo $trash->rel_to_user->name;
                                         } else {
                                             echo 'N/A';
@@ -175,7 +201,7 @@
 @section('footer_script')
     <script>
         $('#checkAll').click(function() {
-            $('input[type="checkbox"]').not(this).prop('checked', this.checked)
+            $('#checkAllmark').not(this).prop('checked', this.checked)
         })
     </script>
     <script>

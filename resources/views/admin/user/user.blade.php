@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
 @section('content')
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">User List</a></li>
+        </ol>
+    </div>
     <div class="row">
         <div class="col-lg-10 m-auto">
             <div class="card">

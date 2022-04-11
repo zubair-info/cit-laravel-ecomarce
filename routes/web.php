@@ -3,6 +3,9 @@
 use App\Http\Controllers\FontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubcategoryController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +27,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// fontend
+Route::get('/', [FontendController::class, 'index'])->name('homepage');
+Route::get('/product/details,{product_id}', [FontendController::class, 'product_details'])->name('product.details');
+// ajax get size by color
+Route::post('/getSize', [FontendController::class, 'getSize']);
+
+
+
+
+// home
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::get('/dash', [HomeController::class, 'dash']);
 
@@ -43,7 +56,7 @@ Route::post('/profile/photo/update', [HomeController::class, 'pictureUpdate']);
 
 
 // category
-Route::get('/add/category', [CategoryController::class, 'index'])->name('add.category');
+Route::get('/add/category', [CategoryController::class, 'index'])->name('category');
 // category insert
 Route::post('/category/insert', [CategoryController::class, 'insertCategory']);
 // category edit
@@ -62,6 +75,54 @@ Route::get('/category/restore/{category_id}', [CategoryController::class, 'resto
 Route::post('/markAll/restore', [CategoryController::class, 'markAllrestore']);
 
 
+//subcategory
+Route::get('/add/subCategory', [SubcategoryController::class, 'index'])->name('subCategory');
+Route::post('/subcategory/insert', [SubcategoryController::class, 'insert']);
+Route::get('/edit/subcategory/{subcategory_id}', [SubcategoryController::class, 'edit'])->name('subcategory.edit');
+Route::post('/subcategory/update', [SubcategoryController::class, 'update']);
+Route::get('/subcategory/delete/{subcategory_id}', [SubcategoryController::class, 'delete'])->name('subcategory.delete');
+
+// product
+Route::get('/add/product', [ProductController::class, 'index'])->name('product');
+// ajax category
+Route::post('/getSubcategory', [ProductController::class, 'getCategory']);
+Route::post('/product/insert', [ProductController::class, 'insert']);
+Route::get('/product/list', [ProductController::class, 'viewProduct'])->name('product.list');
+Route::get('/edit.product/{product_id}', [ProductController::class, 'edit'])->name('edit.product');
+Route::post('/product/Update', [ProductController::class, 'update']);
+Route::get('/product/delete/{product_id}', [ProductController::class, 'delete'])->name('product.delete');
 
 
-Route::get('/', [FontendController::class, 'welcome']);
+
+// inventory
+Route::get('/product/add/color/size', [InventoryController::class, 'color_size'])->name('add.color.size');
+Route::post('/insert/color', [InventoryController::class, 'insertColor']);
+Route::post('/insert/size', [InventoryController::class, 'insertSize']);
+Route::get('/add/inventory/{product_id}', [InventoryController::class, 'index'])->name('add.inventory');
+Route::post('/inventory/insert', [InventoryController::class, 'insertInventory']);
+Route::get('/edit/color/{color_id}', [InventoryController::class, 'edit_color'])->name('color.edit');
+Route::post('/update/color', [InventoryController::class, 'update_color']);
+Route::get('/color/delete/{color_id}', [InventoryController::class, 'delete_color'])->name('color.delete');
+Route::get('/edit/size/{size_id}', [InventoryController::class, 'edit_size'])->name('size.edit');
+Route::post('/update/size', [InventoryController::class, 'update_size']);
+Route::get('/size/delete/{size_id}', [InventoryController::class, 'delete_size'])->name('size.delete');
+Route::get('/edit/inventory/{inventory_id}', [InventoryController::class, 'edit_inventory'])->name('inventory.edit');
+Route::post('/inventory/update', [InventoryController::class, 'update_inventory']);
+Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'delete_inventory'])->name('inventory.delete');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('/', [FontendController::class, 'welcome']);
