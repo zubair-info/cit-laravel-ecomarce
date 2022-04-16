@@ -392,6 +392,7 @@
 
     <!-- custom - main-js -->
     <script src="{{ asset('/fontend/assets/js/main.js') }}"></script>
+    
 
     @yield('footer_script')
 

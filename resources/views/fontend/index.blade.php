@@ -1,7 +1,6 @@
 @extends('fontend.master')
 @section('content')
-    <!-- sidebar cart - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- sidebar cart - start   ================================================= -->
     <div class="sidebar-menu-wrapper">
         <div class="cart_sidebar">
             <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
@@ -66,12 +65,12 @@
         <div class="cart_overlay"></div>
     </div>
     <!-- sidebar cart - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
 
     <!-- product quick view modal - start
 
-                                                                                                                                                                                                                                                                                                                                                            ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                        ================================================== -->
     <div class="modal fade" id="quickview_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -167,11 +166,11 @@
         </div>
     </div>
     <!-- product quick view modal - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
 
     <!-- slider_section - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="slider_section">
         <div class="container">
             <div class="row">
@@ -234,10 +233,10 @@
         </div>
     </section>
     <!-- slider_section - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
     <!-- policy_section - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="policy_section">
         <div class="container">
             <div class="row">
@@ -298,11 +297,11 @@
 
     </section>
     <!-- policy_section - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
 
     <!-- products-with-sidebar-section - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="products-with-sidebar-section">
         <div class="container">
             <div class="row">
@@ -381,7 +380,8 @@
                                                 <ins>
                                                     <span class="woocommerce-Price-amount amount">
                                                         <bdi>
-                                                            <span class="woocommerce-Price-currencySymbol">&#2547;{{ $latest_product->after_discount }}
+                                                            <span
+                                                                class="woocommerce-Price-currencySymbol">&#2547;{{ $latest_product->after_discount }}
                                                             </span>
                                                             <del>&#2547; {{ $latest_product->product_price }}</del>
                                                         </bdi>
@@ -449,20 +449,17 @@
                                                                                     <div class="select_option clearfix">
                                                                                         <h4 class="input_title">Color *
                                                                                         </h4>
-                                                                                        <select>
+                                                                                        <select id="color_id"
+                                                                                            name="color_id"
+                                                                                            class="form-control">
                                                                                             <option
                                                                                                 data-display="- Please select -">
                                                                                                 Choose A Option</option>
-                                                                                            @php
-                                                                                                // color id group by inventory table
-                                                                                                $colors = App\Models\Inventory::where('product_id', $latest_product->id)
-                                                                                                    ->groupBy('color_id')
-                                                                                                    ->selectRaw('count(*) as total, color_id')
-                                                                                                    ->get();
 
-                                                                                            @endphp
-                                                                                            @foreach ($colors as $color)
-                                                                                                <option value="1">
+                                                                                            @foreach (App\Models\Inventory::where('product_id', $latest_product->id)->groupBy('color_id')->selectRaw('count(*) as total, color_id')->get()
+        as $color)
+                                                                                                <option
+                                                                                                    value="{{ $color->color_id }}">
                                                                                                     {{ $color->rel_to_color->color_name }}
                                                                                                 </option>
                                                                                             @endforeach
@@ -473,20 +470,11 @@
                                                                                     <div class="select_option clearfix">
                                                                                         <h4 class="input_title">Size *
                                                                                         </h4>
-                                                                                        <select>
-
+                                                                                        <select id="size_id" name="size_id"
+                                                                                            class="form-control">
                                                                                             <option
                                                                                                 data-display="- Please select -">
-                                                                                                Choose A Option
-                                                                                            </option>
-                                                                                            @php
-                                                                                                // $pr = App\Models\Inventory::where('product_id', $product->id)->get();
-                                                                                            @endphp
-                                                                                            @foreach (App\Models\Inventory::where('product_id', $latest_product->id)->get() as $color)
-                                                                                                <option value="">
-                                                                                                    {{ $color->color_id }}
-                                                                                                </option>
-                                                                                            @endforeach
+                                                                                                Choose A Option</option>
 
                                                                                         </select>
                                                                                     </div>
@@ -816,12 +804,10 @@
             </div>
         </div> <!-- end container  -->
     </section>
-    <!-- products-with-sidebar-section - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- products-with-sidebar-section - end ================================================== -->
 
 
-    <!-- promotion_section - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- promotion_section - start ================================================== -->
     <section class="promotion_section">
         <div class="container">
             <div class="row promotion_banner_wrap">
@@ -855,11 +841,9 @@
             </div>
         </div>
     </section>
-    <!-- promotion_section - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- promotion_section - end ================================================== -->
 
-    <!-- new_arrivals_section - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- new_arrivals_section - start ================================================== -->
     <section class="new_arrivals_section section_space">
         <div class="container">
             <div class="sec-title-link">
@@ -1150,11 +1134,9 @@
             </div>
         </div>
     </section>
-    <!-- new_arrivals_section - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- new_arrivals_section - end ================================================== -->
 
-    <!-- brand_section - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- brand_section - start ================================================== -->
     <div class="brand_section pb-0">
         <div class="container">
             <div class="brand_carousel">
@@ -1191,11 +1173,9 @@
             </div>
         </div>
     </div>
-    <!-- brand_section - end
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- brand_section - end ================================================== -->
 
-    <!-- viewed_products_section - start
-                                                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+    <!-- viewed_products_section - start-->
     <section class="viewed_products_section section_space">
         <div class="container">
 

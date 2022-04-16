@@ -1,7 +1,7 @@
 @extends('fontend.master')
 @section('content')
     <!-- breadcrumb_section - start
-                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                        ================================================== -->
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">

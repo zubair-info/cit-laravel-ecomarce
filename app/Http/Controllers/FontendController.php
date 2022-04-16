@@ -36,6 +36,7 @@ class FontendController extends Controller
     public function getSize(Request $request)
     {
         $str = '<option value="">Choose A Option</option>';
+        
         $get_size = Inventory::where('product_id', $request->product_id)->where('color_id', $request->color_id)->get();
         foreach ($get_size as $size) {
             // echo $size->size_id . ',';
