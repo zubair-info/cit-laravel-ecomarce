@@ -201,7 +201,7 @@
                                         <i class="fal fa-times"></i>
                                     </button>
                                     <ul class="main_menu_list ul_li">
-                                        <li><a class="nav-link" href="#">Home</a></li>
+                                        <li><a class="nav-link" href="{{ route('homepage') }}">Home</a></li>
                                         <li><a class="nav-link" href="#">About us</a></li>
                                         <li><a class="nav-link" href="#">Shop</a></li>
                                         <li><a class="nav-link" href="#">Contact Us</a></li>
@@ -392,9 +392,10 @@
 
     <!-- custom - main-js -->
     <script src="{{ asset('/fontend/assets/js/main.js') }}"></script>
-    
+
 
     @yield('footer_script')
+
 
 </body>
 

@@ -1,7 +1,7 @@
 @extends('fontend.master')
 @section('content')
     <!-- breadcrumb_section - start
-                                                                                                                                                                                                                                                                        ================================================== -->
+                                                                                                                                                                                                                                                                                                    ================================================== -->
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">
@@ -96,7 +96,7 @@
                                 <button type="button" class="input_number_decrement">
                                     <i class="fal fa-minus"></i>
                                 </button>
-                                <input class="input_number" type="text" value="1">
+                                <input class="input_number2" type="text" value="1">
                                 <button type="button" class="input_number_increment">
                                     <i class="fal fa-plus"></i>
                                 </button>
@@ -572,8 +572,11 @@
 @endsection
 @section('footer_script')
     <script>
+        var qty = $('.input_number2').val();
         $('.input_number_increment').click(function() {
-            var qty = $('.input_number').val();
+            qty++;
+            $('.input_number2').val(qty);
+
             // alert(qty);
             var price = $('#price').html();
             // alert(price);
@@ -584,18 +587,18 @@
             $('#total').html(total);
 
         });
+        var qty = $('.input_number2').val();
         $('.input_number_decrement').click(function() {
-            var qty = $('.input_number').val();
+            if (qty > 1) {
+
+                qty--;
+            }
+            $('.input_number2').val(qty);
             // alert(qty);
             var price = $('#price').html();
             // alert(price);
             var total = price * qty;
             // alert(total);
-            if (qty > 1) {
-                qty--;
-                // qty.value = qty;
-            }
-
             $('#total').html(total);
 
         });

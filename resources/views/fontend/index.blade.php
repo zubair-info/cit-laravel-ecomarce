@@ -65,12 +65,12 @@
         <div class="cart_overlay"></div>
     </div>
     <!-- sidebar cart - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
 
     <!-- product quick view modal - start
 
-                                                                                                                                                                                                                                                                                                                                                                                                                        ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        ================================================== -->
     <div class="modal fade" id="quickview_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -166,11 +166,11 @@
         </div>
     </div>
     <!-- product quick view modal - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
 
     <!-- slider_section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="slider_section">
         <div class="container">
             <div class="row">
@@ -233,10 +233,10 @@
         </div>
     </section>
     <!-- slider_section - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
     <!-- policy_section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="policy_section">
         <div class="container">
             <div class="row">
@@ -297,11 +297,11 @@
 
     </section>
     <!-- policy_section - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
 
 
     <!-- products-with-sidebar-section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="products-with-sidebar-section">
         <div class="container">
             <div class="row">
@@ -1408,5 +1408,62 @@
             </div>
         </div>
     </section>
-    <!-- viewed_products_section - end
+@endsection
+
+
+@section('footer_script')
+    <script>
+        var qty = $('.input_number2').val();
+        $('.input_number_increment').click(function() {
+            qty++;
+            $('.input_number2').val(qty);
+            // alert(qty);
+            var price = $('#price').html();
+            // alert(price);
+            var total = price * qty;
+            // alert(total);
+            $('#total').html(total);
+
+        });
+        var qty = $('.input_number2').val();
+        $('.input_number_decrement').click(function() {
+            if (qty > 1) {
+
+                qty--;
+            }
+            $('.input_number2').val(qty);
+            // alert(qty);
+            var price = $('#price').html();
+            // alert(price);
+            var total = price * qty;
+            // alert(total);
+            $('#total').html(total);
+
+        });
+        // get size by color id /product id
+        $('#color_id').change(function() {
+            var color_id = $('#color_id').val();
+            // alert(color_id);
+            var product_id = '{{ $latest_product->id }}';
+            alert(product_id);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/getSize',
+                data: {
+                    'color_id': color_id,
+                    'product_id': product_id
+                },
+                success: function(data) {
+                    // alert(data);
+                    $('#size_id').html(data);
+                }
+
+            });
+        });
+    </script>
 @endsection
