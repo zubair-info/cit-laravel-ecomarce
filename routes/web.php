@@ -36,7 +36,7 @@ Route::post('/getSize', [FontendController::class, 'getSize']);
 
 
 
-// home
+// home dashboard
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Route::get('/dash', [HomeController::class, 'dash']);
 
@@ -82,6 +82,7 @@ Route::get('/edit/subcategory/{subcategory_id}', [SubcategoryController::class, 
 Route::post('/subcategory/update', [SubcategoryController::class, 'update']);
 Route::get('/subcategory/delete/{subcategory_id}', [SubcategoryController::class, 'delete'])->name('subcategory.delete');
 
+
 // product
 Route::get('/add/product', [ProductController::class, 'index'])->name('product');
 // ajax category
@@ -109,18 +110,6 @@ Route::get('/size/delete/{size_id}', [InventoryController::class, 'delete_size']
 Route::get('/edit/inventory/{inventory_id}', [InventoryController::class, 'edit_inventory'])->name('inventory.edit');
 Route::post('/inventory/update', [InventoryController::class, 'update_inventory']);
 Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'delete_inventory'])->name('inventory.delete');
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -22,21 +22,23 @@ class FontendController extends Controller
         ]);
     }
 
-    // product details page / shop page
+    // product details page
     public function product_details($product_id)
     {
         $product_info = Product::find($product_id);
+        $related_product = Product::Where('id', '!=', $product_id)->Where('category_id', $product_info->category_id)->get();
         $avaliable_color = Inventory::where('product_id', $product_id)->groupBy('color_id')->selectRaw('count(*) as total, color_id')->get();
         return view('fontend.product_details', [
             'product_info' => $product_info,
             'avaliable_color' => $avaliable_color,
+            'related_product' => $related_product,
         ]);
     }
     // get size by color id
     public function getSize(Request $request)
     {
         $str = '<option value="">Choose A Option</option>';
-        
+
         $get_size = Inventory::where('product_id', $request->product_id)->where('color_id', $request->color_id)->get();
         foreach ($get_size as $size) {
             // echo $size->size_id . ',';
