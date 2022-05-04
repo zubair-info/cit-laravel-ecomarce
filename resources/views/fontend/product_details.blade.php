@@ -1,7 +1,7 @@
 @extends('fontend.master')
 @section('content')
     <!-- breadcrumb_section - start
-                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">
@@ -22,9 +22,9 @@
                             // echo App\Models\Thumbnil::where('product_id', $product_info->id)->get();
                         @endphp
                         <div class="details_image_carousel">
-                            @foreach (App\Models\Thumbnil::where('product_id', $product_info->id)->get() as $thumb)
+                            @foreach (App\Models\Product::where('id', $product_info->id)->get() as $preview)
                                 <div class="slider_item">
-                                    <img src="{{ asset('/uploads/product/thumbnil') }}/{{ $thumb->thumbnil }}"
+                                    <img src="{{ asset('/uploads/product/preview') }}/{{ $preview->preview }}"
                                         alt="image_not_found">
                                 </div>
                             @endforeach
@@ -139,7 +139,7 @@
                     <div class="tab-pane fade show active" id="description_tab" role="tabpanel">
 
                         <p class="mb-0">
-                            {{ $product_info->long_desp }}
+                            <?php echo $product_info->long_desp; ?>
                         </p>
                     </div>
 

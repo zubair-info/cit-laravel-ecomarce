@@ -101,14 +101,16 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group mt-4">
-                                    <label for="" class="form-label">Long Description</label>
+                                <label for="" class="form-label">Long Description</label>
 
-                                    <textarea name="long_desp" id="" cols="30" rows="10" class="form-control"></textarea>
-                                    @error('long_desp')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                <div class="form-group mt-4 ">
+
+                                    <textarea name="long_desp" id="" cols="30" rows="10" class="form-control summernote"></textarea>
+
                                 </div>
+                                @error('long_desp')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
 
                             </div>
                         </div>

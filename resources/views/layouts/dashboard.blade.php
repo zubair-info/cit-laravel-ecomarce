@@ -16,6 +16,10 @@
     <link href="{{ asset('backend/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link href="{{ asset('backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+
+    <!-- Summernote -->
+    <link href="{{ asset('backend/vendor/summernote/summernote.css') }}" rel="stylesheet">
+
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
@@ -1051,6 +1055,11 @@
     <!-- Datatable -->
     <script src="{{ asset('backend/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/js/plugins-init/datatables.init.js') }}"></script>
+
+    <!-- Summernote -->
+    <script src="{{ asset('backend/vendor/summernote/js/summernote.min.js') }}"></script>
+    <!-- Summernote init -->
+    <script src="{{ asset('backend/js/plugins-init/summernote-init.js') }}"></script>
     <script>
         function carouselReview() {
             /*  testimonial one function by = owl.carousel.js */

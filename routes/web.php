@@ -3,10 +3,13 @@
 use App\Http\Controllers\FontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerLoginController;
+use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
-
+use App\Models\CustomerLogin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -115,3 +118,12 @@ Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'del
 
 
 // Route::get('/', [FontendController::class, 'welcome']);
+
+
+// customer login
+Route::post('/customer/login', [CustomerLoginController::class, 'customer_login'])->name('customer.login');
+Route::get('/customer/logout', [CustomerLoginController::class, 'customer_logout'])->name('customer.logout');
+Route::get('/customer/acount', [CustomerController::class, 'customer_acount'])->name('customer.acount');
+Route::post('/customer/acount/update', [CustomerController::class, 'acount_update']);
+Route::get('/customer/register', [CustomerRegisterController::class, 'customer_register'])->name('customer.register');
+Route::post('/customer/insert', [CustomerRegisterController::class, 'customer_insert']);
