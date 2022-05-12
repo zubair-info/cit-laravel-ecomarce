@@ -4,7 +4,7 @@
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{ route('homepage') }}">Home</a></li>
                 <li>My Account</li>
             </ul>
         </div>
@@ -29,6 +29,9 @@
                         <button class="nav-link text-start w-100" id="v-pills-profile-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-profile_picture" type="button" role="tab"
                             aria-controls="v-pills-profile_picture" aria-selected="false">Picture Change</button>
+                        <button class="nav-link text-start w-100" id="v-pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-profile_password" type="button" role="tab"
+                            aria-controls="v-pills-profile_password" aria-selected="false">Password Change</button>
                         <button class="nav-link text-start w-100" id="v-pills-messages-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages"
                             aria-selected="false">My Orders</button>
@@ -61,11 +64,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="number" class="form-label">Phone</label>
-                                    <input type="text" name="number" class="form-control" id="number">
+                                    <input type="text" name="number"
+                                        value="{{ Auth::guard('customerlogin')->user()->number }}" class="form-control"
+                                        id="number">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="address" class="form-label">Address</label>
-                                    <input type="text" name="address" class="form-control" id="address">
+                                    <input type="text" name="address"
+                                        value="{{ Auth::guard('customerlogin')->user()->address }}" class="form-control"
+                                        id="address">
                                 </div>
 
                                 {{-- <div class="col-md-12">
@@ -80,24 +87,66 @@
                         <div class="tab-pane fade" id="v-pills-profile_picture" role="tabpanel"
                             aria-labelledby="v-pills-profile-tab">
                             <h5 class="text-center pb-3">Profile picture change</h5>
-                            <form class="row g-3 p-2" action="" method="post">
-                                <div class="col-md-6">
-                                    <label for="inputnamel4" class="form-label">Name</label>
-                                    <input type="text" name="name" class="form-control" id="inputnamel4"
-                                        value="{{ Auth::guard('customerlogin')->user()->name }}">
+                            <form action="{{ url('/profile/photo/update') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="custom-file mb-4">
+                                    <input type="file" name="profile_photo" class="custom-file-input">
+
+                                    @error('profile_photo')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="inputEmail4" class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" id="inputEmail4"
-                                        value="{{ Auth::guard('customerlogin')->user()->email }}" readonly>
+                                <button class="btn btn-primary" type="submit">Update</button>
+
+
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-profile_password" role="tabpanel"
+                            aria-labelledby="v-pills-profile-tab">
+                            <h5 class="text-center pb-3">Password change</h5>
+                            <form action="{{ url('/customer/password/update') }} " method="post">
+                                @csrf
+                                <div class="form-group mb-4">
+                                    <label for="old_password" class="form-label">Old Password</label>
+
+                                    <input type="password" name="old_password" id="old_password" class="form-control">
+                                    @if (session('wrong_pass'))
+                                        <strong class="text-danger mt-2"> {{ session('wrong_pass') }} </strong>
+                                    @endif
+
+                                    @if (session('same_pass'))
+                                        <strong class="text-danger mt-2"> {{ session('same_pass') }} </strong>
+                                    @endif
+                                    @error('old_password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+
+
+
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="inputPassword4" class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" id="inputPassword4">
+                                <div class="form-group mb-4">
+                                    <label for="password" class="form-label">New Password</label>
+
+                                    <input type="password" id="password" name="password" class="form-control">
+                                    @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+
                                 </div>
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-primary active">Update</button>
+                                <div class="form-group mb-4">
+                                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+
+                                    <input type="password" name="password_confirmation" id="password_confirmation"
+                                        class="form-control">
+                                    @error('password_confirmation')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+
                                 </div>
+                                <button class="btn btn-primary" type="submit">Update</button>
+
+
                             </form>
                         </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
@@ -133,4 +182,51 @@
         </div>
         </div>
     </section>
+@endsection
+
+@section('footer_script')
+    {{-- all insert code --}}
+    @if (session('success_msg'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_msg') }}'
+            })
+        </script>
+    @endif
+
+    {{-- all update code --}}
+
+    @if (session('update'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('update') }}'
+            })
+        </script>
+    @endif
 @endsection

@@ -91,27 +91,16 @@
                     <h4>Picture Change</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/profile/photo/update') }} " method="post" enctype="multipart/form-data">
+                    <form action="{{ url('/profile/picture/update') }} " method="post" enctype="multipart/form-data">
                         @csrf
 
-                        {{-- <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-primary btn-sm" type="submit">Button</button>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" name="profile_photo" class="custom-file-input">
-                                <label class="custom-file-label">Choose file</label>
-                                @error('profile_photo')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div> --}}
+
                         <div class="custom-file mb-4">
                             <input type="file" name="profile_photo" class="custom-file-input">
                             <label class="custom-file-label">Choose file</label>
-                            @error('profile_photo')
+                            {{-- @error('profile_photo')
                                 <div class="text-danger">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                         <button class="btn btn-primary" type="submit">Update</button>
 

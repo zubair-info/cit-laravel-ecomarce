@@ -113,7 +113,7 @@ class HomeController extends Controller
     }
 
     // profile picture update
-    public function pictureUpdate(Request $request)
+    public function picture_update(Request $request)
     {
         $request->validate([
             'profile_photo' => 'file|max:1024',
@@ -132,16 +132,15 @@ class HomeController extends Controller
             User::find(Auth::id())->update([
                 'profile_photo' => $filename,
             ]);
-            return back();
+            return back()->with('update', 'Picture Update  Sucessfully!!');
         } else {
             $delete_form = public_path('uploads/users/' . Auth::user()->profile_photo);
-            unlink($delete_form);
+            // unlink($delete_form);
             Image::make($uploaded_photo)->save(public_path('/uploads/users/' . $filename));
             User::find(Auth::id())->update([
                 'profile_photo' => $filename,
             ]);
+            return back()->with('update', 'Picture Update  Sucessfully!!');
         }
-
-        return back();
     }
 }

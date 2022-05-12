@@ -1,76 +1,6 @@
 @extends('fontend.master')
 @section('content')
-    <!-- sidebar cart - start   ================================================= -->
-    <div class="sidebar-menu-wrapper">
-        <div class="cart_sidebar">
-            <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
-            <ul class="cart_items_list ul_li_block mb_30 clearfix">
-                <li>
-                    <div class="item_image">
-                        <img src="{{ asset('fontend/assets/images/cart/cart_img_1.jpg') }}" alt="image_not_found">
-                    </div>
-                    <div class="item_content">
-                        <h4 class="item_title">Yellow Blouse</h4>
-                        <span class="item_price">$30.00</span>
-                    </div>
-                    <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i></button>
-                </li>
-                <li>
-                    <div class="item_image">
-                        <img src="{{ asset('fontend/assets/images/cart/cart_img_2.jpg') }}" alt="image_not_found">
-                    </div>
-                    <div class="item_content">
-                        <h4 class="item_title">Yellow Blouse</h4>
-                        <span class="item_price">$30.00</span>
-                    </div>
-                    <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i></button>
-                </li>
-                <li>
-                    <div class="item_image">
-                        <img src="{{ asset('fontend/assets/images/cart/cart_img_3.jpg') }}" alt="image_not_found">
-                    </div>
-                    <div class="item_content">
-                        <h4 class="item_title">Yellow Blouse</h4>
-                        <span class="item_price">$30.00</span>
-                    </div>
-                    <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i></button>
-                </li>
-            </ul>
-
-            <ul class="total_price ul_li_block mb_30 clearfix">
-                <li>
-                    <span>Subtotal:</span>
-                    <span>$90</span>
-                </li>
-                <li>
-                    <span>Vat 5%:</span>
-                    <span>$4.5</span>
-                </li>
-                <li>
-                    <span>Discount 20%:</span>
-                    <span>- $18.9</span>
-                </li>
-                <li>
-                    <span>Total:</span>
-                    <span>$75.6</span>
-                </li>
-            </ul>
-
-            <ul class="btns_group ul_li_block clearfix">
-                <li><a class="btn btn_primary" href="cart.html">View Cart</a></li>
-                <li><a class="btn btn_secondary" href="checkout.html">Checkout</a></li>
-            </ul>
-        </div>
-
-        <div class="cart_overlay"></div>
-    </div>
-    <!-- sidebar cart - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
-
-
-    <!-- product quick view modal - start
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        ================================================== -->
+    <!-- product quick view modal - start================================================== -->
     <div class="modal fade" id="quickview_popup" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -165,12 +95,11 @@
             </div>
         </div>
     </div>
-    <!-- product quick view modal - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+    <!-- product quick view modal - end ================================================== -->
 
 
     <!-- slider_section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ================================================== -->
     <section class="slider_section">
         <div class="container">
             <div class="row">
@@ -232,11 +161,9 @@
             </div>
         </div>
     </section>
-    <!-- slider_section - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+    <!-- slider_section - end ================================================== -->
 
-    <!-- policy_section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+    <!-- policy_section - start================================================== -->
     <section class="policy_section">
         <div class="container">
             <div class="row">
@@ -296,12 +223,10 @@
         </div>
 
     </section>
-    <!-- policy_section - end
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+    <!-- policy_section - end================================================== -->
 
 
-    <!-- products-with-sidebar-section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+    <!-- products-with-sidebar-section - start================================================== -->
     <section class="products-with-sidebar-section">
         <div class="container">
             <div class="row">
@@ -455,9 +380,13 @@
                                                                                             <option
                                                                                                 data-display="- Please select -">
                                                                                                 Choose A Option</option>
-
-                                                                                            @foreach (App\Models\Inventory::where('product_id', $latest_product->id)->groupBy('color_id')->selectRaw('count(*) as total, color_id')->get()
-        as $color)
+                                                                                            @php
+                                                                                                $colors = App\Models\Inventory::where('product_id', $latest_product->id)
+                                                                                                    ->groupBy('color_id')
+                                                                                                    ->selectRaw('count(*) as total, color_id')
+                                                                                                    ->get();
+                                                                                            @endphp
+                                                                                            @foreach ($colors as $color)
                                                                                                 <option
                                                                                                     value="{{ $color->color_id }}">
                                                                                                     {{ $color->rel_to_color->color_name }}

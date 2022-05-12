@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\FontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
@@ -30,14 +31,38 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// fontend
+// =================================  fontend  ===========================================
+
 Route::get('/', [FontendController::class, 'index'])->name('homepage');
 Route::get('/product/details,{product_id}', [FontendController::class, 'product_details'])->name('product.details');
 // ajax get size by color
 Route::post('/getSize', [FontendController::class, 'getSize']);
 
+// =================================  customer  ===========================================
+
+// customer login
+Route::post('/customer/login', [CustomerLoginController::class, 'customer_login'])->name('customer.login');
+Route::get('/customer/logout', [CustomerLoginController::class, 'customer_logout'])->name('customer.logout');
+Route::get('/customer/acount', [CustomerController::class, 'customer_acount'])->name('customer.acount');
+Route::post('/customer/acount/update', [CustomerController::class, 'acount_update']);
+Route::post('/profile/photo/update', [CustomerController::class, 'picture_update']);
+Route::post('/customer/password/update', [CustomerController::class, 'password_update']);
+Route::get('/customer/register', [CustomerRegisterController::class, 'customer_register'])->name('customer.register');
+Route::post('/customer/insert', [CustomerRegisterController::class, 'customer_insert']);
 
 
+// =================================  cart  ===============================================
+// cart by master page
+Route::post('/cart/store', [CartController::class, 'cart_store']);
+Route::get('/cart/remove,{cart_id}', [CartController::class, 'cart_delete'])->name('cart.remove');
+// cart page
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::post('/getCartId', [CartController::class, 'cart_remove']);
+
+
+
+
+// =================================  Admin Dashboard  ======================================
 
 // home dashboard
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -45,26 +70,18 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/user/list', [HomeController::class, 'userList'])->name('user');
 Route::get('/user/delete,{user_id}', [HomeController::class, 'userDelete'])->name('user.delete');
-// profile change
 Route::get('/profile/change', [HomeController::class, 'profileChange'])->name('profile.change');
-// profile name change
 Route::post('/profile/name/update', [HomeController::class, 'nameChange']);
-// profile password update
 Route::post('/profile/password/update', [HomeController::class, 'passwordUpdate']);
-// profilr picture update
-Route::post('/profile/photo/update', [HomeController::class, 'pictureUpdate']);
+Route::post('/profile/picture/update', [HomeController::class, 'picture_update']);
 
 
 
+// =================================  Category  ======================================
 
-
-// category
 Route::get('/add/category', [CategoryController::class, 'index'])->name('category');
-// category insert
 Route::post('/category/insert', [CategoryController::class, 'insertCategory']);
-// category edit
 Route::get('/edit/category/{category_id}', [CategoryController::class, 'edit'])->name('category.edit');
-//category update
 Route::post('/category/update', [CategoryController::class, 'updateCategory']);
 // category soft delete
 Route::get('/category/delete,{category_id}', [CategoryController::class, 'categorySoftDelete'])->name('categorySoft.delete');
@@ -78,7 +95,8 @@ Route::get('/category/restore/{category_id}', [CategoryController::class, 'resto
 Route::post('/markAll/restore', [CategoryController::class, 'markAllrestore']);
 
 
-//subcategory
+// =================================  Sub category  ======================================
+
 Route::get('/add/subCategory', [SubcategoryController::class, 'index'])->name('subCategory');
 Route::post('/subcategory/insert', [SubcategoryController::class, 'insert']);
 Route::get('/edit/subcategory/{subcategory_id}', [SubcategoryController::class, 'edit'])->name('subcategory.edit');
@@ -86,7 +104,8 @@ Route::post('/subcategory/update', [SubcategoryController::class, 'update']);
 Route::get('/subcategory/delete/{subcategory_id}', [SubcategoryController::class, 'delete'])->name('subcategory.delete');
 
 
-// product
+// =================================  product  ======================================
+
 Route::get('/add/product', [ProductController::class, 'index'])->name('product');
 // ajax category
 Route::post('/getSubcategory', [ProductController::class, 'getCategory']);
@@ -98,7 +117,8 @@ Route::get('/product/delete/{product_id}', [ProductController::class, 'delete'])
 
 
 
-// inventory
+// =================================  Inventory  ======================================
+
 Route::get('/product/add/color/size', [InventoryController::class, 'color_size'])->name('add.color.size');
 Route::post('/insert/color', [InventoryController::class, 'insertColor']);
 Route::post('/insert/size', [InventoryController::class, 'insertSize']);
@@ -118,12 +138,3 @@ Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'del
 
 
 // Route::get('/', [FontendController::class, 'welcome']);
-
-
-// customer login
-Route::post('/customer/login', [CustomerLoginController::class, 'customer_login'])->name('customer.login');
-Route::get('/customer/logout', [CustomerLoginController::class, 'customer_logout'])->name('customer.logout');
-Route::get('/customer/acount', [CustomerController::class, 'customer_acount'])->name('customer.acount');
-Route::post('/customer/acount/update', [CustomerController::class, 'acount_update']);
-Route::get('/customer/register', [CustomerRegisterController::class, 'customer_register'])->name('customer.register');
-Route::post('/customer/insert', [CustomerRegisterController::class, 'customer_insert']);

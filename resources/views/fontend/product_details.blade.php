@@ -1,7 +1,6 @@
 @extends('fontend.master')
 @section('content')
-    <!-- breadcrumb_section - start
-                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+    <!-- breadcrumb_section - start================================================== -->
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">
@@ -56,21 +55,23 @@
                             </ul>
                             <span class="review_value"> 3 Rating(s)</span>
                         </div>
+                        <form action="{{ url('/cart/store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product_info->id }}">
+                            <div class="item_price">
+                                <span> &#2547;</span><span id="price"> {{ $product_info->after_discount }}</span>
+                                <del>&#2547; {{ $product_info->product_price }}</del>
+                            </div>
+                            <hr>
 
-                        <div class="item_price">
-                            <span> &#2547;</span><span id="price"> {{ $product_info->after_discount }}</span>
-                            <del>&#2547; {{ $product_info->product_price }}</del>
-                        </div>
-                        <hr>
+                            <div class="item_attribute">
 
-                        <div class="item_attribute">
-                            <form action="#">
                                 <div class="row">
                                     <div class="col col-md-6">
                                         <div class="select_option clearfix">
                                             <h4 class="input_title">Color *</h4>
                                             <select id="color_id" name="color_id" class="form-control">
-                                                <option data-display="- Please select -">Choose A Option</option>
+                                                <option data-display="- Please select -" value="0">Choose A Option</option>
 
                                                 @foreach ($avaliable_color as $color)
                                                     <option value="{{ $color->color_id }}">
@@ -81,35 +82,42 @@
                                     </div>
                                     <div class="col col-md-6">
                                         <div class="select_option clearfix">
-                                            <h4 class="input_title">Size *</h4>
+                                            <h4 class="input_title">Size*</h4>
                                             <select id="size_id" name="size_id" class="form-control">
-                                                <option data-display="- Please select -">Choose A Option</option>
+                                                <option data-display="- Please select -" value="0">Choose A Option</option>
 
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                        </div>
-
-                        <div class="quantity_wrap">
-                            <div class="quantity_input">
-                                <button type="button" class="input_number_decrement">
-                                    <i class="fal fa-minus"></i>
-                                </button>
-                                <input class="input_number2" type="text" value="1">
-                                <button type="button" class="input_number_increment">
-                                    <i class="fal fa-plus"></i>
-                                </button>
                             </div>
-                            <div class="total_price">Total:<span id="total">
-                                    {{ $product_info->after_discount }}</span></div>
-                        </div>
 
-                        <ul class="default_btns_group ul_li">
-                            <li><a class="btn btn_primary addtocart_btn" href="#!">Add To Cart</a></li>
-                        </ul>
+                            <div class="quantity_wrap">
+                                <div class="quantity_input">
+                                    <button type="button" class="input_number_decrement">
+                                        <i class="fal fa-minus"></i>
+                                    </button>
+                                    <input class="input_number2" type="text" value="1" name="quantity">
+                                    <button type="button" class="input_number_increment">
+                                        <i class="fal fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="total_price">Total:<span id="total">
+                                        {{ $product_info->after_discount }}</span></div>
+                            </div>
+
+                            <ul class="default_btns_group ul_li">
+                                @auth('customerlogin')
+                                    <li><button class="btn btn_primary addtocart_btn" type="submit">Add To Cart</button></li>
+                                @else
+                                    <li><a class="btn btn_primary addtocart_btn" href="{{ route('customer.register') }}">Add
+                                            To
+                                            Cart</a></li>
+                                @endauth
+                            </ul>
+                        </form>
                     </div>
-                    </form>
+
                 </div>
             </div>
 
@@ -423,4 +431,24 @@
             });
         });
     </script>
+    @if (session('insert'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('insert') }}'
+            })
+        </script>
+    @endif
 @endsection

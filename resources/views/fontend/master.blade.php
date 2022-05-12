@@ -41,6 +41,53 @@
 
 <body>
 
+    <!-- sidebar cart - start   ================================================= -->
+    <div class="sidebar-menu-wrapper">
+        <div class="cart_sidebar">
+            <button type="button" class="close_btn"><i class="fal fa-times"></i></button>
+            @php
+                $subtotal = 0;
+            @endphp
+            @foreach (App\Models\Cart::where('customer_id', Auth::guard('customerlogin')->id())->get() as $cart)
+                <ul class="cart_items_list ul_li_block mb_30 clearfix">
+                    <li>
+                        <div class="item_image">
+                            <img src="{{ asset('uploads/product/preview') }}/{{ $cart->rel_to_product->preview }}"
+                                alt="image_not_found">
+                        </div>
+                        <div class="item_content">
+                            <h4 class="item_title">{{ $cart->rel_to_product->product_name }}</h4>
+                            <span class="item_price">&#2547; {{ $cart->rel_to_product->after_discount }} X
+                                {{ $cart->quantity }}</span>
+                        </div>
+                        <a type="button" class="remove_btn" href="{{ route('cart.remove', $cart->id) }}"><i
+                                class="fal fa-trash-alt"></i></a>
+                    </li>
+
+                </ul>
+                @php
+                    $subtotal += $cart->rel_to_product->after_discount * $cart->quantity;
+                @endphp
+            @endforeach
+
+            <ul class="total_price ul_li_block mb_30 clearfix">
+                <li>
+                    <span>Subtotal:</span>
+                    <span>&#2547; {{ $subtotal }}</span>
+                </li>
+
+            </ul>
+
+            <ul class="btns_group ul_li_block clearfix">
+                <li><a class="btn btn_primary" href="{{ route('cart') }}">View Cart</a></li>
+                {{-- <li><a class="btn btn_secondary" href="checkout.html">Checkout</a></li> --}}
+            </ul>
+        </div>
+
+        <div class="cart_overlay"></div>
+    </div>
+    <!-- sidebar cart - end================================================== -->
+
     <!-- body_wrap - start -->
     <div class="body_wrap">
 
@@ -96,7 +143,7 @@
                     <div class="row align-items-center">
                         <div class="col col-lg-3 col-md-3 col-sm-12">
                             <div class="brand_logo">
-                                <a class="brand_link" href="index.html">
+                                <a class="brand_link" href="{{ route('homepage') }}">
                                     <img src="{{ asset('fontend/assets/images/logo/logo_1x.png') }}"
                                         srcset="{{ asset('fontend/assets/images/logo/logo_2x.png 2x') }}" alt>
                                 </a>
@@ -149,7 +196,8 @@
                                     <li>
                                         <span class="cart_icon">
                                             <i class="icon icon-ShoppingCart"></i>
-                                            <small class="cart_counter">3</small>
+                                            <small
+                                                class="cart_counter">{{ App\Models\Cart::where('customer_id', Auth::guard('customerlogin')->id())->count() }}</small>
                                         </span>
                                     </li>
                                 </ul>
@@ -250,8 +298,8 @@
                                             <path
                                                 d="M4,20 C4,17 8,17 10,15 C11,14 8,14 8,9 C8,5.667 9.333,4 12,4 C14.667,4 16,5.667 16,9 C16,14 13,14 14,15 C16,17 20,17 20,20" />
                                         </svg> --}}
-                                        <img src=" {{ asset('/uploads/users') }}/{{ Auth::user()->profile_photo }} "
-                                            width="50" alt="" />
+                                        {{-- <img src=" {{ asset('/uploads/customer') }}/{{ Auth::guard('customerlogin')->user()->profile_photo }} "
+                                            width="50" style="border-radius:50% " alt="" /> --}}
                                     </a>
                                 </li>
                             </ul>
@@ -302,7 +350,7 @@
                         <div class="col col-lg-4 col-md-6 col-sm-6">
                             <div class="footer_widget footer_about">
                                 <div class="brand_logo">
-                                    <a class="brand_link" href="index.html">
+                                    <a class="brand_link" href="{{ route('homepage') }}">
                                         <img src="{{ asset('fontend/assets/images/logo/logo_1x.png') }}"
                                             srcset="{{ asset('fontend/assets/images/logo/logo_2x.png 2x') }}"
                                             alt="logo_not_found">
@@ -403,7 +451,11 @@
     </div>
     <!-- body_wrap - end -->
 
+
+
     <!-- fraimwork - jquery include -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="{{ asset('/fontend/assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/fontend/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('/fontend/assets/js/bootstrap.min.js') }}"> </script>
@@ -415,12 +467,36 @@
     <!-- google map  -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
     <script src="{{ asset('/fontend/assets/js/gmaps.min.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- custom - main-js -->
     <script src="{{ asset('/fontend/assets/js/main.js') }}"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {{-- all insert code --}}
+    @if (session('success_msg'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_msg') }}'
+            })
+        </script>
+    @endif
     @yield('footer_script')
+
 
 
 </body>
