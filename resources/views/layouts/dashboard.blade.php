@@ -985,6 +985,17 @@
                         </ul>
                     </li>
 
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="flaticon-381-networking"></i>
+                            <span class="nav-text">Coupon</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            {{-- <li><a href="{{ route('add.inventory') }}">Add Inventory</a></li> --}}
+                            <li><a href="{{ route('coupon') }}">Add Couppon</a></li>
+
+                        </ul>
+                    </li>
+
                 </ul>
 
             </div>

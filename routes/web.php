@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\CustomerRegisterController;
@@ -134,7 +135,10 @@ Route::get('/edit/inventory/{inventory_id}', [InventoryController::class, 'edit_
 Route::post('/inventory/update', [InventoryController::class, 'update_inventory']);
 Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'delete_inventory'])->name('inventory.delete');
 
+// coupon
 
+Route::get('/coupon', [CouponController::class, 'index'])->name('coupon');
+Route::post('/coupon/insert', [CouponController::class, 'insert']);
 
 
 // Route::get('/', [FontendController::class, 'welcome']);
