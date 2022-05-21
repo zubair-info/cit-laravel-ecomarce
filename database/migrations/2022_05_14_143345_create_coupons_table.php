@@ -19,6 +19,7 @@ class CreateCouponsTable extends Migration
             $table->integer('discount');
             $table->string('type');
             $table->date('validity');
+            $table->integer('status');
             $table->timestamps();
         });
     }

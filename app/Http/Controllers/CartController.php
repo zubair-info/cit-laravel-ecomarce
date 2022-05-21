@@ -27,7 +27,7 @@ class CartController extends Controller
         return back()->with('insert', 'Cart Add Sucessfully!!');
     }
 
-    // mini cart delete
+    // mini cart delete master page
     public function cart_delete($cart_id)
     {
         Cart::find($cart_id)->delete();
@@ -65,12 +65,26 @@ class CartController extends Controller
             'discount' => $discount,
             'message' => $message,
             'type' => $type,
+            'coupun_code' => $coupun_code,
         ]);
     }
 
+    // cart memove cart page
     public function cart_remove(Request $request)
     {
         Cart::find($request->cart_id)->delete();
         return back();
+    }
+    // cart update cart page
+    public function cart_update(Request $request)
+    {
+        // print_r($request->all());
+        foreach ($request->quantity as $cart_id => $quantity) {
+            Cart::find($cart_id)->update([
+                'quantity' => $quantity,
+            ]);
+
+            return back();
+        }
     }
 }

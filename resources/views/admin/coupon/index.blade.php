@@ -8,7 +8,7 @@
     </div>
     <div class="row">
 
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <div class="card">
                 <div class="card-header">
                     <div class="cart-tittle">
@@ -16,47 +16,60 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-responsive-md">
+                    <div class="table-responsive">
+                        <table class="table table-responsive-md">
 
-                        <tr>
-                            <th>SL</th>
-                            <th>name</th>
-                            <th>Discount(%)</th>
-                            <th>Type</th>
-                            <th>Validity</th>
-                            <th>status</th>
-                            <th>Action</th>
-                        </tr>
-
-                        @foreach ($coupons as $coupon)
                             <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $coupon->coupon_name }}</td>
-                                <td>{{ $coupon->discount }}</td>
-                                <td>{{ $coupon->type }}</td>
-                                <td>{{ $coupon->validity }}</td>
-                                <td>Status</td>
-
-
-                                <td>
-                                    <button name="#" type="button" class="delete_btn btn btn-danger shadow btn-xs sharp"><i
-                                            class="fa fa-trash"></i></button>
-
-                                    <button name="#" type="button" class="delete_btn btn btn-danger shadow btn-xs sharp"><i
-                                            class="fa fa-trash"></i></button>
-                                </td>
-
-
+                                <th>SL</th>
+                                <th>name</th>
+                                <th>Discount(%)</th>
+                                <th>Type</th>
+                                <th>Validity</th>
+                                <th>status</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
 
-                    </table>
+                            @foreach ($coupons as $coupon)
+                                <tr>
+                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ $coupon->coupon_name }}</td>
+                                    <td>{{ $coupon->discount }}</td>
+                                    <td>{{ $coupon->type }}</td>
+                                    <td>{{ Carbon\Carbon::parse($coupon->validity)->format('D, d F Y') }}</td>
+                                    <td>
+                                        @php
+
+                                            $carbon = Carbon\Carbon::now()->format('Y-m-d');
+                                        @endphp
+                                        @if ($coupon->validity >= $carbon)
+                                            <span class="badge light badge-success">Valid</span>
+                                        @else
+                                            <span class="badge light badge-danger">Invalid</span>
+                                        @endif
+
+                                    </td>
+
+
+                                    <td>
+                                        <button name="{{ route('coupon.delete', $coupon->id) }}" type="button"
+                                            class="delete_btn btn btn-danger shadow btn-xs sharp"><i
+                                                class="fa fa-trash"></i></button>
+
+
+                                    </td>
+
+
+                                </tr>
+                            @endforeach
+
+                        </table>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
                     <h4 class="font-weight-bold text-black">Add Sub Category </h4>

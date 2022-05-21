@@ -33,6 +33,9 @@
 
     <!-- select option - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/fontend/assets/css/nice-select.css') }}">
+    <!-- select option - css include -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/fontend/assets/css/nice-select.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/fontend/assets/css/woocommerce-2.css') }}">
 
     <!-- custom - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/fontend/assets/css/style.css') }}">
@@ -458,7 +461,7 @@
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="{{ asset('/fontend/assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/fontend/assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/fontend/assets/js/bootstrap.min.js') }}"> </script>
+    <script src="{{ asset('/fontend/assets/js/bootstrap.min.js') }}"></script>
 
 
     {{-- carousel - jquery plugins collection --}}

@@ -33,4 +33,10 @@ class CouponController extends Controller
         ]);
         return back()->with('success_msg', 'Coupon Add Sucessfully');
     }
+    // coupon delete
+    public function delete($coupon_id)
+    {
+        Coupon::find($coupon_id)->delete();
+        return back()->with('delete', 'Coupon Delete Sucessfully');
+    }
 }

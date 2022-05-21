@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerLoginController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\TestController;
 use App\Models\CustomerLogin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +61,11 @@ Route::get('/cart/remove,{cart_id}', [CartController::class, 'cart_delete'])->na
 // cart page
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/getCartId', [CartController::class, 'cart_remove']);
+Route::post('/cart/update', [CartController::class, 'cart_update'])->name('cart.update');
+
+
+//
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
 
 
@@ -139,6 +146,7 @@ Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'del
 
 Route::get('/coupon', [CouponController::class, 'index'])->name('coupon');
 Route::post('/coupon/insert', [CouponController::class, 'insert']);
+Route::get('/coupon/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete');
 
 
 // Route::get('/', [FontendController::class, 'welcome']);
