@@ -162,17 +162,21 @@
                                     <th>Total</th>
                                     <th>Action</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>#120</td>
-                                    <td>52500</td>
-                                    <td>200</td>
-                                    <td>100</td>
-                                    <td>52400</td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary">Download Invoice</a>
-                                    </td>
-                                </tr>
+                                @foreach ($orders as $key => $order)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td># {{ $order->id }}</td>
+                                        <td>{{ $order->sub_total }}</td>
+                                        <td>{{ $order->discount }}</td>
+                                        <td>{{ $order->delivery_charge }}</td>
+                                        <td>{{ $order->total }}</td>
+                                        <td>
+                                            <a href="{{ route('download.invoice', $order->id) }}"
+                                                class="btn btn-primary">Download
+                                                Invoice</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
 

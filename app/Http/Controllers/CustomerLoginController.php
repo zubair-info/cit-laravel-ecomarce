@@ -15,7 +15,7 @@ class CustomerLoginController extends Controller
             // echo 'not ok';
         } else {
             // echo ' ok';
-            return route('customer.register');
+            return redirect('/customer/register');
         }
     }
 

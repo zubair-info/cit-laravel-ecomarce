@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomerLogin;
+use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,8 @@ class CustomerController extends Controller
     //
     public function customer_acount()
     {
-        return view('fontend.customer.acount');
+        $orders = Order::where('user_id', Auth::guard('customerlogin')->id())->get();
+        return view('fontend.customer.acount', compact('orders'));
     }
 
     public function acount_update(Request $request)
@@ -98,5 +100,11 @@ class CustomerController extends Controller
             // echo 'Old Pass Not Correct';
             return back()->with('wrong_pass', 'Old Pass Not Correct');
         }
+    }
+
+    // invoice download customer
+    public function download_invoice($order_id)
+    {
+        echo  $order_id;
     }
 }

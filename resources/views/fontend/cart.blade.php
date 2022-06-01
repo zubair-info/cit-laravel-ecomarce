@@ -86,17 +86,27 @@
 
 
                 <div class="row">
+
                     @php
+                        // if ($type == '%') {
+                        //     session([
+                        //         'discount' => $discount,
+                        //     ]);
+                        // }
+                        
+                        // $type == 'percentage' ? '%' : 'Tk';
                         session([
                             'discount' => $discount,
+                            'discount_cal' => $type == 'percentage' ? round($sub_total - ($sub_total * $discount) / 100) : $sub_total - $discount,
                         ]);
+                        
                     @endphp
                     <div class="col col-lg-6">
-                        <ul class="btns_group ul_li_right">
+                        {{-- <ul class="btns_group ul_li_right">
                             <li class="m-3"><button class="btn border_black" type="submit">Update Cart</button>
                             </li>
                             <li><a class="btn btn_dark" href="{{ route('checkout') }}">Prceed To Checkout</a></li>
-                        </ul>
+                        </ul> --}}
                     </div>
 
 
@@ -119,10 +129,20 @@
                                         @else
                                             {{ $discount }}
                                         @endif --}}
-                                        @if ($type)
-                                            {{ $type == 'percentage' ? '%' : 'Tk' }}
-                                        @else
-                                        @endif
+                                        @php
+                                            if ($type == 'percentage') {
+                                                session([
+                                                    'type' => '%',
+                                                ]);
+                                                echo '%';
+                                            } else {
+                                                session([
+                                                    'type' => 'Tk',
+                                                ]);
+                                                echo 'Tk';
+                                            }
+                                        @endphp
+
 
                                     </span>
                                 </li>
@@ -134,7 +154,14 @@
                                         {{ $type == 'percentage' ? round($sub_total - ($sub_total * $discount) / 100) : $sub_total - $discount }}</span>
                                 </li>
                             </ul>
+                            <ul class="btns_group ul_li_right">
+                                <li class="m-3"><button class="btn border_black" type="submit">Update
+                                        Cart</button>
+                                </li>
+                                <li><a class="btn btn_dark" href="{{ route('checkout') }}">Prceed To Checkout</a></li>
+                            </ul>
                         </div>
+
                     </div>
                     </form>
                     <div class="">
@@ -156,7 +183,6 @@
                                     </div>
                                 </form>
                             </div>
-
 
                         </div>
                     </div>

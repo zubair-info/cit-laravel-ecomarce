@@ -14,17 +14,23 @@ class CartController extends Controller
     public function cart_store(Request $request)
     {
         // dd($request->all());
-        Cart::insert([
+        if (Cart::where('product_id', $request->product_id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->exists()) {
+            Cart::where('product_id', $request->product_id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->increment('quantity', $request->quantity);
+            return back()->with('insert', 'Cart Add Sucessfully!!');
+        } else {
 
-            'customer_id' => Auth::guard('customerlogin')->id(),
-            'product_id' => $request->product_id,
-            'color_id' => $request->color_id,
-            'size_id' => $request->size_id,
-            'quantity' => $request->quantity,
-            'created_at' => Carbon::now(),
+            Cart::insert([
 
-        ]);
-        return back()->with('insert', 'Cart Add Sucessfully!!');
+                'customer_id' => Auth::guard('customerlogin')->id(),
+                'product_id' => $request->product_id,
+                'color_id' => $request->color_id,
+                'size_id' => $request->size_id,
+                'quantity' => $request->quantity,
+                'created_at' => Carbon::now(),
+
+            ]);
+            return back()->with('insert', 'Cart Add Sucessfully!!');
+        }
     }
 
     // mini cart delete master page
@@ -80,11 +86,11 @@ class CartController extends Controller
     {
         // print_r($request->all());
         foreach ($request->quantity as $cart_id => $quantity) {
+            // echo $cart_id;
             Cart::find($cart_id)->update([
                 'quantity' => $quantity,
             ]);
-
-            return back();
         }
+        return back();
     }
 }

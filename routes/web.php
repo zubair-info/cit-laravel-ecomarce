@@ -57,15 +57,24 @@ Route::post('/customer/insert', [CustomerRegisterController::class, 'customer_in
 // =================================  cart  ===============================================
 // cart by master page
 Route::post('/cart/store', [CartController::class, 'cart_store']);
-Route::get('/cart/remove,{cart_id}', [CartController::class, 'cart_delete'])->name('cart.remove');
+Route::get('/cart/remove/{cart_id}', [CartController::class, 'cart_delete'])->name('cart.remove');
 // cart page
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/getCartId', [CartController::class, 'cart_remove']);
 Route::post('/cart/update', [CartController::class, 'cart_update'])->name('cart.update');
 
 
-//
+// =================================  Checkout  ===============================================
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::post('/getState', [CheckoutController::class, 'get_state']);
+Route::post('/getCity', [CheckoutController::class, 'get_city']);
+Route::post('/checkout/insert', [CheckoutController::class, 'checkout_insert'])->name('checkout.insert');
+Route::get('/order/success', [CheckoutController::class, 'order_success'])->name('order.success');
+
+// invoice
+
+Route::get('/order/invoice/{order_id}', [CustomerController::class, 'download_invoice'])->name('download.invoice');
+
 
 
 

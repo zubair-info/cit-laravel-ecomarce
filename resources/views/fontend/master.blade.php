@@ -37,6 +37,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/fontend/assets/css/nice-select.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/fontend/assets/css/woocommerce-2.css') }}">
 
+    <!-- select2 - css include -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- custom - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/fontend/assets/css/style.css') }}">
 </head>
@@ -471,6 +474,9 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
     <script src="{{ asset('/fontend/assets/js/gmaps.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- select2  - js include -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- custom - main-js -->
     <script src="{{ asset('/fontend/assets/js/main.js') }}"></script>

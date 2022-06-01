@@ -99,7 +99,7 @@
 
 
     <!-- slider_section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="slider_section">
         <div class="container">
             <div class="row">
@@ -245,6 +245,11 @@
                                         <div class="product-pic">
                                             <img src="{{ asset('uploads/product/preview/') }}/{{ $latest_product->preview }}"
                                                 alt>
+                                            @if ($latest_product->discount)
+                                                <span class="theme-badge-2">{{ $latest_product->discount }} % OFF</span>
+                                            @else
+                                            @endif
+
                                             <div class="actions">
                                                 <ul>
                                                     <li>
@@ -305,10 +310,17 @@
                                                 <ins>
                                                     <span class="woocommerce-Price-amount amount">
                                                         <bdi>
-                                                            <span
-                                                                class="woocommerce-Price-currencySymbol">&#2547;{{ $latest_product->after_discount }}
-                                                            </span>
-                                                            <del>&#2547; {{ $latest_product->product_price }}</del>
+                                                            @if ($latest_product->discount)
+                                                                <span
+                                                                    class="woocommerce-Price-currencySymbol">&#2547;{{ $latest_product->after_discount }}
+                                                                </span>
+                                                                <del>&#2547; {{ $latest_product->product_price }}</del>
+                                                            @else
+                                                                <span
+                                                                    class="woocommerce-Price-currencySymbol">&#2547;{{ $latest_product->after_discount }}
+                                                                </span>
+                                                            @endif
+
                                                         </bdi>
                                                     </span>
                                                 </ins>
