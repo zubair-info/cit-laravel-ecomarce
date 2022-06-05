@@ -30,8 +30,27 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $inventory->rel_to_product->product_name }}</td>
-                                <td>{{ $inventory->rel_to_color->color_name }}</td>
-                                <td>{{ $inventory->rel_to_size->size_name }}</td>
+
+                                <td>
+                                    @php
+                                        if (App\Models\Color::where('id', $inventory->color_id)->exists()) {
+                                            echo $inventory->rel_to_color->color_name;
+                                        } else {
+                                            echo 'N/A';
+                                        }
+                                    @endphp
+                                    {{-- {{ $inventory->rel_to_color->color_name }} --}}
+                                </td>
+                                <td>
+                                    @php
+                                        if (App\Models\Size::where('id', $inventory->size_id)->exists()) {
+                                            echo $inventory->rel_to_size->size_name;
+                                        } else {
+                                            echo 'N/A';
+                                        }
+                                    @endphp
+                                    {{-- {{ $inventory->rel_to_size->size_name }} --}}
+                                </td>
                                 <td>{{ $inventory->qty }}</td>
                                 <td>
                                     <div class="d-flex">

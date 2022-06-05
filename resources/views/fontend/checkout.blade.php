@@ -20,6 +20,8 @@
                         <form name="checkout" method="post" class="checkout woocommerce-checkout"
                             action="{{ route('checkout.insert') }}">
                             @csrf
+
+                            <input type="hidden" name="user_id" value="{{ Auth::guard('customerlogin')->id() }}">
                             <div class="col2-set" id="customer_details">
                                 <div class="coll-1">
                                     <div class="woocommerce-billing-fields">
@@ -125,15 +127,20 @@
                                     <tr class="cart-subtotal">
                                         <th>Discount</th>
                                         <td><span class="woocommerce-Price-amount amount">
-                                                {{ session('discount') }}</span>
-                                            {{ session('type') }}
+                                                {{ session('discount') }}
+                                                {{ session('type') }}
+
+
+                                            </span>
+                                            {{-- {{ session('type') }} --}}
 
                                         </td>
                                         {{-- koto % discount cilo  seta controller deya hoicha --}}
-                                        <input type="hidden" name="discount" value="{{ session('discount') }}">
+                                        <input type="hidden" id="discount" name="discount"
+                                            value="{{ session('discount') }}">
 
                                         {{-- cart page theke discount calculation kore niya ascha hoicha --}}
-                                        <input type="hidden" id="discount" value="{{ session('discount_cal') }}">
+                                        <input type="hidden" value="{{ session('discount_cal') }}">
                                     </tr>
                                     <tr class="shipping">
                                         <th>Delivery Charge</th>
@@ -148,8 +155,10 @@
                                     </tr>
                                     <tr class="order-total">
                                         <th>Total</th>
-                                        <td><strong><span class="woocommerce-Price-amount amount"
-                                                    id="grad_total">{{ session('discount_cal') }}</span></strong>
+                                        <td><strong><span class="woocommerce-Price-amount amount" id="grad_total">
+                                                    {{ $sub_total - session('discount') }}
+                                                    {{-- {{ session('discount_cal') }} --}}
+                                                </span></strong>
                                         </td>
                                     </tr>
                                 </table>
@@ -212,9 +221,9 @@
             var devilery_charge = $(this).val();
             var sub_total = $('#sub_total').val();
             var discount = $('#discount').val();
-            var total = parseInt(discount) + parseInt(devilery_charge);
+            var total = parseInt(sub_total) - parseInt(discount) + (parseInt(devilery_charge));
             $('#grad_total').html(total);
-            alert(discount)
+            // alert(total)
             // alert(devilery_charge)
         })
     </script>

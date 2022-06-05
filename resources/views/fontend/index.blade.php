@@ -99,7 +99,7 @@
 
 
     <!-- slider_section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
     <section class="slider_section">
         <div class="container">
             <div class="row">
@@ -296,8 +296,8 @@
                                             <h4><a
                                                     href="{{ route('product.details', $latest_product->id) }}">{{ $latest_product->product_name }}</a>
                                             </h4>
-                                            {{-- <p><a
-                                                    href="{{ route('product.details', $latest_product->id) }}">{{ $latest_product->sort_desp }}</a> --}}
+                                            <p><a
+                                                    href="{{ route('product.details', $latest_product->id) }}">{{ $latest_product->sort_desp }}</a>
                                             </p>
                                             <div class="rating">
                                                 <i class="fas fa-star"></i>
@@ -326,7 +326,9 @@
                                                 </ins>
                                             </span>
                                             <div class="add-cart-area">
-                                                <button class="add-to-cart">Add to cart</button>
+                                                <a class="add-to-cart btn btn-danger"
+                                                    href="{{ route('product.details', $latest_product->id) }}">Add to
+                                                    cart</a>
                                             </div>
                                         </div>
 
@@ -442,7 +444,8 @@
 
                                                                     <ul class="default_btns_group ul_li">
                                                                         <li><a class="btn btn_primary addtocart_btn"
-                                                                                href="#!">Add To
+                                                                                href="{{ route('product.details', $latest_product->id) }}">Add
+                                                                                To
                                                                                 Cart</a></li>
                                                                     </ul>
                                                                 </div>

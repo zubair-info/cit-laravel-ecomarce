@@ -130,8 +130,8 @@ class InventoryController extends Controller
     public function insertInventory(Request $request)
     {
         $request->validate([
-            'size_id' => 'required',
-            'color_id' => 'required',
+            // 'size_id' => 'required',
+            // 'color_id' => 'required',
             'qty' => 'required',
 
         ]);
@@ -174,8 +174,6 @@ class InventoryController extends Controller
             'color_id' => $request->color_id,
             'qty' => $request->qty,
             'updated_at' => Carbon::now(),
-
-
 
         ]);
         return back();

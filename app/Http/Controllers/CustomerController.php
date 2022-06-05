@@ -11,6 +11,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use PDF;
 
 class CustomerController extends Controller
 {
@@ -105,6 +106,22 @@ class CustomerController extends Controller
     // invoice download customer
     public function download_invoice($order_id)
     {
-        echo  $order_id;
+        // echo $order_id;
+
+        $pdf = PDF::loadView('fontend.customer.invoice.invoice', [
+            'order_id'  => $order_id,
+        ]);
+
+        // return $pdf->download('invoice.pdf');
+        return $pdf->stream('invoice.pdf');
+        // return view('fontend.customer.invoice.invoice', compact('order_id'));
+    }
+
+    public function view_invoice($order_id)
+    {
+        $pdf = PDF::loadView('fontend.customer.invoice.invoice', [
+            'order_id'  => $order_id,
+        ]);
+        return view('fontend.customer.invoice.invoice', compact('order_id'));
     }
 }

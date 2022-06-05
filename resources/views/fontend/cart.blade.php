@@ -41,7 +41,7 @@
                                                 <img src="{{ asset('uploads/product/preview') }}/{{ $cart->rel_to_product->preview }}"
                                                     alt="image_not_found">
                                                 <h3><a
-                                                        href="shop_details.html">{{ $cart->rel_to_product->product_name }}</a>
+                                                        href="{{ route('product.details', $cart->rel_to_product->id) }}">{{ $cart->rel_to_product->product_name }}</a>
                                                 </h3>
                                             </div>
                                         </td>
@@ -96,8 +96,9 @@
                         
                         // $type == 'percentage' ? '%' : 'Tk';
                         session([
-                            'discount' => $discount,
-                            'discount_cal' => $type == 'percentage' ? round($sub_total - ($sub_total * $discount) / 100) : $sub_total - $discount,
+                            // 'discount' => $discount,
+                            // 'discount_cal' => $type == 'percentage' ? round($sub_total - ($sub_total * $discount) / 100) : $sub_total - $discount,
+                            'discount' => $type == 'percentage' ? round(($sub_total * $discount) / 100) : $discount,
                         ]);
                         
                     @endphp

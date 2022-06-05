@@ -86,7 +86,7 @@
 
             <ul class="btns_group ul_li_block clearfix">
                 <li><a class="btn btn_primary" href="{{ route('cart') }}">View Cart</a></li>
-                {{-- <li><a class="btn btn_secondary" href="checkout.html">Checkout</a></li> --}}
+                <li><a class="btn btn_secondary" href="{{ route('checkout') }}">Checkout</a></li>
             </ul>
         </div>
 
@@ -304,8 +304,10 @@
                                             <path
                                                 d="M4,20 C4,17 8,17 10,15 C11,14 8,14 8,9 C8,5.667 9.333,4 12,4 C14.667,4 16,5.667 16,9 C16,14 13,14 14,15 C16,17 20,17 20,20" />
                                         </svg> --}}
-                                        {{-- <img src=" {{ asset('/uploads/customer') }}/{{ Auth::guard('customerlogin')->user()->profile_photo }} "
-                                            width="50" style="border-radius:50% " alt="" /> --}}
+                                        @auth('customerlogin')
+                                            <img src=" {{ asset('/uploads/customer') }}/{{ Auth::guard('customerlogin')->user()->profile_photo }} "
+                                                width="50" style="border-radius:50% " alt="" />
+                                        @endauth
                                     </a>
                                 </li>
                             </ul>

@@ -174,6 +174,9 @@
                                             <a href="{{ route('download.invoice', $order->id) }}"
                                                 class="btn btn-primary">Download
                                                 Invoice</a>
+                                            <a href="{{ route('download.invoiceView', $order->id) }}"
+                                                class="btn btn-success">View
+                                                Invoice</a>
                                         </td>
                                     </tr>
                                 @endforeach

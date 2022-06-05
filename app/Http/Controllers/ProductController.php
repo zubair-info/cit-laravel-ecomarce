@@ -67,6 +67,7 @@ class ProductController extends Controller
                 'after_discount' => $request->product_price - ($request->product_price * $request->discount) / 100,
                 'sort_desp' => $request->sort_desp,
                 'long_desp' => $request->long_desp,
+                'created_at' => Carbon::now(),
                 // 'preview' => 'Product Image',
 
             ]);

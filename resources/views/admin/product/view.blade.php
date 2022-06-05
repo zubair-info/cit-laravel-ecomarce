@@ -68,12 +68,12 @@
                                                 <a href="{{ route('edit.product', $product->id) }}"
                                                     class="btn btn-warning shadow btn-xs sharp mr-1"><i
                                                         class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                <a href="{{ route('product.delete', $product->id) }}"
+                                                {{-- <a href="{{ route('product.delete', $product->id) }}"
                                                     class="btn btn-danger shadow btn-xs sharp"><i
-                                                        class="fa fa-trash"></i></a>
-                                                {{-- <button name="{{ route('product.delete', $product->id) }}" type="button"
+                                                        class="fa fa-trash"></i></a> --}}
+                                                <button name="{{ route('product.delete', $product->id) }}" type="button"
                                                     class="delete_btn btn btn-danger shadow btn-xs sharp"><i
-                                                        class="fa fa-trash"></i></button> --}}
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </td>
 
@@ -159,9 +159,10 @@
 @section('footer_script')
     <script>
         $(document).ready(function() {
-
+            // alert('ok');
 
             $('.delete_btn').click(function() {
+                // alert('ok');
 
                 Swal.fire({
                     title: 'Are you sure?',
@@ -175,7 +176,7 @@
                     if (result.isConfirmed) {
 
                         var link = $(this).attr('name')
-                        // alert(link)
+                        alert(link)
                         window.location.href = link
 
                     }

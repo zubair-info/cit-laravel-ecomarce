@@ -157,7 +157,7 @@
                     <tbody>
                         @foreach ($trash_all as $key => $trash)
                             <tr class="{{ $loop->odd ? 'text-danger' : 'text-success' }}">
-                                <td><input type="checkbox" name="markRestoreAll[]" class="marktrash"
+                                <td><input type="checkbox" name="markRestoreAll[]" class="marktrash" id="marktrash"
                                         value=" {{ $trash->id }} "></td>
 
                                 <td>{{ $key + 1 }}</td>
@@ -206,7 +206,7 @@
     </script>
     <script>
         $('#checTrashkAll').click(function() {
-            $('.marktrash').not(this).prop('checked', this.checked)
+            $('#marktrash').not(this).prop('checked', this.checked)
         })
     </script>
 @endsection

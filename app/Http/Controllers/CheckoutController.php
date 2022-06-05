@@ -66,7 +66,7 @@ class CheckoutController extends Controller
     public function checkout_insert(Request $request)
     {
         // print_r($request->all());
-        echo  $request->discount;
+        // echo  $request->discount;
         if ($request->payment_method == 1) {
             $order_id = Order::insertGetId([
                 'user_id' => Auth::guard('customerlogin')->id(),
@@ -141,9 +141,10 @@ class CheckoutController extends Controller
 
             return redirect()->route('order.success')->with('order_success', 'Congratulations!!Your Order Has Been Place!');
         } elseif ($request->payment_method == 2) {
-            echo 'SSL';
-        } else {
-            echo 'stripe';
+            $data = $request->all();
+            return view('exampleHosted', [
+                'data' => $data
+            ]);
         }
     }
 

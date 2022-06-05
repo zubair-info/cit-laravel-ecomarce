@@ -18,12 +18,19 @@
                 <div class="col col-lg-6">
                     <div class="product_details_image">
                         @php
+                            
                             // echo App\Models\Thumbnil::where('product_id', $product_info->id)->get();
                         @endphp
                         <div class="details_image_carousel">
-                            @foreach (App\Models\Product::where('id', $product_info->id)->get() as $preview)
+                            {{-- @foreach (App\Models\Product::where('id', $product_info->id)->get() as $preview)
                                 <div class="slider_item">
                                     <img src="{{ asset('/uploads/product/preview') }}/{{ $preview->preview }}"
+                                        alt="image_not_found">
+                                </div>
+                            @endforeach --}}
+                            @foreach (App\Models\Thumbnil::where('product_id', $product_info->id)->get() as $thumb)
+                                <div class="slider_item">
+                                    <img src="{{ asset('/uploads/product/thumbnil') }}/{{ $thumb->thumbnil }}"
                                         alt="image_not_found">
                                 </div>
                             @endforeach

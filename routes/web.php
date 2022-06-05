@@ -13,6 +13,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Models\CustomerLogin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,7 +38,7 @@ Auth::routes();
 // =================================  fontend  ===========================================
 
 Route::get('/', [FontendController::class, 'index'])->name('homepage');
-Route::get('/product/details,{product_id}', [FontendController::class, 'product_details'])->name('product.details');
+Route::get('/product/details/{product_id}', [FontendController::class, 'product_details'])->name('product.details');
 // ajax get size by color
 Route::post('/getSize', [FontendController::class, 'getSize']);
 
@@ -74,6 +75,22 @@ Route::get('/order/success', [CheckoutController::class, 'order_success'])->name
 // invoice
 
 Route::get('/order/invoice/{order_id}', [CustomerController::class, 'download_invoice'])->name('download.invoice');
+Route::get('/order/invoiceview/{order_id}', [CustomerController::class, 'view_invoice'])->name('download.invoiceView');
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/ssl/pay', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
 
 
 
