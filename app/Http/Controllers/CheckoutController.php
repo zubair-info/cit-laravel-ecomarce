@@ -145,6 +145,11 @@ class CheckoutController extends Controller
             return view('exampleHosted', [
                 'data' => $data
             ]);
+        } else {
+            $data = $request->all();
+            return view('stripe', [
+                'data' => $data
+            ]);
         }
     }
 

@@ -16,7 +16,7 @@ class CartController extends Controller
         // dd($request->all());
         if (Cart::where('product_id', $request->product_id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->exists()) {
             Cart::where('product_id', $request->product_id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->increment('quantity', $request->quantity);
-            return back()->with('insert', 'Cart Add Sucessfully!!');
+            return redirect()->route('cart')->with('insert', 'Cart Add Sucessfully!!');
         } else {
 
             Cart::insert([
@@ -29,7 +29,7 @@ class CartController extends Controller
                 'created_at' => Carbon::now(),
 
             ]);
-            return back()->with('insert', 'Cart Add Sucessfully!!');
+            return redirect()->route('cart')->with('insert', 'Cart Add Sucessfully!!');
         }
     }
 

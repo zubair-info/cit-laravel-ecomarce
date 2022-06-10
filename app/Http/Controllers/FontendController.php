@@ -46,4 +46,9 @@ class FontendController extends Controller
         }
         echo $str;
     }
+
+    // product review
+    public function product_review(Request $request)
+    {
+    }
 }

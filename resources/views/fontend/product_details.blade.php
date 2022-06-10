@@ -252,30 +252,55 @@
                                 </div>
                             </div>
                         </div>
+                        @auth('customerlogin')
+                            @if (App\Models\OrderProduct::where('user_id', Auth::guard('customerlogin')->id())->where('product_id', $product_info->id)->exists())
+                                @if (App\Models\OrderProduct::where('user_id', Auth::guard('customerlogin')->id())->where('product_id', $product_info->id)->whereNull('review')->exists())
+                                    <div class="customer_review_form">
+                                        <h4 class="reviews_tab_title">Add a review</h4>
+                                        <form action="{{ route('product.review') }}" method="post">
+                                            <div class="form_item">
+                                                <input type="text" name="name"
+                                                    value="{{ Auth::guard('customerlogin')->user()->name }}"
+                                                    placeholder="Your name*">
+                                            </div>
+                                            <div class="form_item">
+                                                <input type="email"
+                                                    value="{{ Auth::guard('customerlogin')->user()->emails }}" name="email"
+                                                    placeholder="Your Email*">
+                                            </div>
+                                            <div class="your_ratings">
+                                                <h5>Your Ratings:</h5>
+                                                <button type="button" class="star" value="1"><i
+                                                        class="fal fa-star"></i></button>
+                                                <button type="button" class="star" value="2"><i
+                                                        class="fal fa-star"></i></button>
+                                                <button type="button" class="star" value="3"><i
+                                                        class="fal fa-star"></i></button>
+                                                <button type="button" class="star" value="4"><i
+                                                        class="fal fa-star"></i></button>
+                                                <button type="button" class="star" value="5"><i
+                                                        class="fal fa-star"></i></button>
+                                            </div>
+                                            <input type="hidden" name="star" id="star">
+                                            <input type="hidden" name="product_id" value="{{ $product_info->id }}">
+                                            <div class="form_item">
+                                                <textarea name="review" placeholder="Your Review*"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn_primary">Submit Now</button>
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="alert alert-success">You All Ready Reviewed this product</div>
+                                @endif
+                            @else
+                                <div class="alert alert-warning col-md-6">You did not purchased this product !!</div>
+                            @endif
+                        @else
+                            <div class="alert alert-danger col-md-6">Please Login to Review this products-> <a
+                                    class="btn btn-danger" href="{{ route('customer.register') }}">Login</a> </div>
+                        @endauth
 
-                        <div class="customer_review_form">
-                            <h4 class="reviews_tab_title">Add a review</h4>
-                            <form action="#">
-                                <div class="form_item">
-                                    <input type="text" name="name" placeholder="Your name*">
-                                </div>
-                                <div class="form_item">
-                                    <input type="email" name="email" placeholder="Your Email*">
-                                </div>
-                                <div class="your_ratings">
-                                    <h5>Your Ratings:</h5>
-                                    <button type="button"><i class="fal fa-star"></i></button>
-                                    <button type="button"><i class="fal fa-star"></i></button>
-                                    <button type="button"><i class="fal fa-star"></i></button>
-                                    <button type="button"><i class="fal fa-star"></i></button>
-                                    <button type="button"><i class="fal fa-star"></i></button>
-                                </div>
-                                <div class="form_item">
-                                    <textarea name="comment" placeholder="Your Review*"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn_primary">Submit Now</button>
-                            </form>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -458,4 +483,13 @@
             })
         </script>
     @endif
+
+    {{-- review product --}}
+    <script>
+        $('.star').click(function() {
+
+            var star = $(this).attr('value');
+            $('#star').attr('value', star);
+        });
+    </script>
 @endsection

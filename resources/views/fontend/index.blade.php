@@ -99,7 +99,7 @@
 
 
     <!-- slider_section - start
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ================================================== -->
     <section class="slider_section">
         <div class="container">
             <div class="row">
@@ -338,414 +338,433 @@
                                 {{-- modal quice view --}}
                                 <div class="modal fade" id="quickview_popup{{ $latest_product->id }}"
                                     aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalToggleLabel2">Product Quick View
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="product_details">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col col-lg-6">
-                                                                <div class="product_details_image p-0">
-                                                                    <img src="{{ asset('uploads/product/preview/') }}/{{ $latest_product->preview }}"
-                                                                        alt>
+                                    <form action="">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalToggleLabel2">Product Quick
+                                                        View
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="product_details">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col col-lg-6">
+                                                                    <div class="product_details_image p-0">
+                                                                        <img src="{{ asset('uploads/product/preview/') }}/{{ $latest_product->preview }}"
+                                                                            alt>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="col-lg-6">
-                                                                <div class="product_details_content">
-                                                                    <h2 class="item_title">
-                                                                        {{ $latest_product->product_name }}</h2>
-                                                                    <p>{{ $latest_product->sort_desp }}</p>
-                                                                    <div class="item_review">
-                                                                        <ul class="rating_star ul_li">
-                                                                            <li><i class="fas fa-star"></i>></li>
-                                                                            <li><i class="fas fa-star"></i></li>
-                                                                            <li><i class="fas fa-star"></i></li>
-                                                                            <li><i class="fas fa-star"></i></li>
-                                                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                                                        </ul>
-                                                                        <span class="review_value">3 Rating(s)</span>
-                                                                    </div>
-
-                                                                    <div class="item_price">
-                                                                        <span>&#2547;
-                                                                            {{ $latest_product->after_discount }}</span>
-                                                                        <del>&#2547;
-                                                                            {{ $latest_product->product_price }}</del>
-                                                                    </div>
-                                                                    <hr>
-
-                                                                    <div class="item_attribute">
-                                                                        <form action="#">
-                                                                            <div class="row">
-                                                                                <div class="col col-md-6">
-                                                                                    <div class="select_option clearfix">
-                                                                                        <h4 class="input_title">Color *
-                                                                                        </h4>
-                                                                                        <select id="color_id"
-                                                                                            name="color_id"
-                                                                                            class="form-control">
-                                                                                            <option
-                                                                                                data-display="- Please select -">
-                                                                                                Choose A Option</option>
-                                                                                            @php
-                                                                                                $colors = App\Models\Inventory::where('product_id', $latest_product->id)
-                                                                                                    ->groupBy('color_id')
-                                                                                                    ->selectRaw('count(*) as total, color_id')
-                                                                                                    ->get();
-                                                                                            @endphp
-                                                                                            @foreach ($colors as $color)
-                                                                                                <option
-                                                                                                    value="{{ $color->color_id }}">
-                                                                                                    {{ $color->rel_to_color->color_name }}
-                                                                                                </option>
-                                                                                            @endforeach
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col col-md-6">
-                                                                                    <div class="select_option clearfix">
-                                                                                        <h4 class="input_title">Size *
-                                                                                        </h4>
-                                                                                        <select id="size_id" name="size_id"
-                                                                                            class="form-control">
-                                                                                            <option
-                                                                                                data-display="- Please select -">
-                                                                                                Choose A Option</option>
-
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                    </div>
-
-                                                                    <div class="quantity_wrap">
-                                                                        <div class="quantity_input">
-                                                                            <button type="button"
-                                                                                class="input_number_decrement">
-                                                                                <i class="fal fa-minus"></i>
-                                                                            </button>
-                                                                            <input class="input_number" type="text"
-                                                                                value="1">
-                                                                            <button type="button"
-                                                                                class="input_number_increment">
-                                                                                <i class="fal fa-plus"></i>
-                                                                            </button>
+                                                                <div class="col-lg-6">
+                                                                    <div class="product_details_content">
+                                                                        <h2 class="item_title">
+                                                                            {{ $latest_product->product_name }}</h2>
+                                                                        <p>{{ $latest_product->sort_desp }}</p>
+                                                                        <div class="item_review">
+                                                                            <ul class="rating_star ul_li">
+                                                                                <li><i class="fas fa-star"></i>></li>
+                                                                                <li><i class="fas fa-star"></i></li>
+                                                                                <li><i class="fas fa-star"></i></li>
+                                                                                <li><i class="fas fa-star"></i></li>
+                                                                                <li><i class="fas fa-star-half-alt"></i>
+                                                                                </li>
+                                                                            </ul>
+                                                                            <span class="review_value">3 Rating(s)</span>
                                                                         </div>
-                                                                        <div class="total_price">Total:
-                                                                            {{ $latest_product->after_discount }}</div>
-                                                                    </div>
 
-                                                                    <ul class="default_btns_group ul_li">
-                                                                        <li><a class="btn btn_primary addtocart_btn"
+                                                                        <div class="item_price">
+                                                                            &#2547; <span id="price">
+                                                                                {{ $latest_product->after_discount }}</span>
+                                                                            <del>
+                                                                                &#2547;{{ $latest_product->product_price }}</del>
+                                                                        </div>
+                                                                        <hr>
+
+                                                                        <div class="item_attribute">
+                                                                            <form action="#">
+                                                                                <div class="row">
+                                                                                    <div class="col col-md-6">
+                                                                                        <div
+                                                                                            class="select_option clearfix">
+                                                                                            <h4 class="input_title">
+                                                                                                Color *
+                                                                                            </h4>
+                                                                                            <select id="color_id"
+                                                                                                name="color_id"
+                                                                                                class="form-control">
+                                                                                                <option
+                                                                                                    data-display="- Please select -">
+                                                                                                    Choose A Option</option>
+                                                                                                @php
+                                                                                                    $colors = App\Models\Inventory::where('product_id', $latest_product->id)
+                                                                                                        ->groupBy('color_id')
+                                                                                                        ->selectRaw('count(*) as total, color_id')
+                                                                                                        ->get();
+                                                                                                @endphp
+                                                                                                @foreach ($colors as $color)
+                                                                                                    <option
+                                                                                                        value="{{ $color->color_id }}">
+                                                                                                        {{ $color->rel_to_color->color_name }}
+                                                                                                    </option>
+                                                                                                @endforeach
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col col-md-6">
+                                                                                        <div
+                                                                                            class="select_option clearfix">
+                                                                                            <h4 class="input_title">Size
+                                                                                                *
+                                                                                            </h4>
+                                                                                            <select id="size_id"
+                                                                                                name="size_id"
+                                                                                                class="form-control">
+                                                                                                <option
+                                                                                                    data-display="- Please select -">
+                                                                                                    Choose A Option</option>
+
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </div>
+
+                                                                        <div class="quantity_wrap">
+                                                                            <div class="quantity_input">
+                                                                                <button type="button"
+                                                                                    class="input_number_decrement">
+                                                                                    <i class="fal fa-minus"></i>
+                                                                                </button>
+                                                                                <input class="input_number2" type="text"
+                                                                                    value="1">
+                                                                                <button type="button"
+                                                                                    class="input_number_increment">
+                                                                                    <i class="fal fa-plus"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="total_price">Total:&#2547;
+                                                                                <span
+                                                                                    id="total">{{ $latest_product->after_discount }}</span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <ul class="default_btns_group ul_li">
+
+                                                                            @auth('customerlogin')
+                                                                                <li><button
+                                                                                        class="btn btn_primary addtocart_btn"
+                                                                                        type="submit">Add To Cart</button></li>
+                                                                            @else
+                                                                                <li><a class="btn btn_primary addtocart_btn"
+                                                                                        href="{{ route('customer.register') }}">Add
+                                                                                        To
+                                                                                        Cart</a></li>
+                                                                            @endauth
+                                                                            {{-- <a class="btn btn_primary addtocart_btn"
                                                                                 href="{{ route('product.details', $latest_product->id) }}">Add
                                                                                 To
-                                                                                Cart</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                                                                                Cart</a> --}}
 
-                        </div>
-                    </div>
-
-                    <div class="top_category_wrap">
-                        <div class="sec-title-link">
-                            <h3>Top categories</h3>
-                        </div>
-                        <div class="top_category_carousel2" data-slick='{"dots": false}'>
-                            @foreach ($categories as $category)
-                                <div class="slider_item">
-                                    <div class="category_boxed">
-                                        <a href="#!">
-                                            <span class="item_image">
-                                                <img src="{{ asset('uploads/category/') }}/{{ $category->category_image }}"
-                                                    alt="image_not_found">
-                                            </span>
-                                            <span class="item_title">{{ $category->category_name }}</span>
-                                        </a>
-                                    </div>
+                                                                        </ul>
+                                                                    </div>
+                                    </form>
                                 </div>
-                            @endforeach
-                        </div>
-                        <div class="carousel_nav carousel-nav-top-right">
-                            <button type="button" class="tc_left_arrow"><i
-                                    class="fal fa-long-arrow-alt-left"></i></button>
-                            <button type="button" class="tc_right_arrow"><i
-                                    class="fal fa-long-arrow-alt-right"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 order-lg-9">
-                    <div class="product-sidebar">
-                        <div class="widget latest_product_carousel">
-                            <div class="title_wrap">
-                                <h3 class="area_title">Best Selling Products</h3>
-                                <div class="carousel_nav">
-                                    <button type="button" class="vs4i_left_arrow"><i
-                                            class="fal fa-angle-left"></i></button>
-                                    <button type="button" class="vs4i_right_arrow"><i
-                                            class="fal fa-angle-right"></i></button>
-                                </div>
-                            </div>
-                            <div class="vertical_slider_4item" data-slick='{"dots": false}'>
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_1.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_2.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_3.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_4.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_1.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_2.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_3.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="slider_item">
-                                    <div class="small_product_layout">
-                                        <a class="item_image" href="shop_details.html">
-                                            <img src="{{ asset('fontend/assets/images/latest_product/latest_product_4.png') }}"
-                                                alt="image_not_found">
-                                        </a>
-                                        <div class="item_content">
-                                            <h3 class="item_title">
-                                                <a href="shop_details.html">Product Sample</a>
-                                            </h3>
-                                            <ul class="rating_star ul_li">
-                                                <li>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="item_price">
-                                                <span>$690.99</span>
-                                                <del>$720.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget product-add">
-                            <div class="product-img">
-                                <img src="{{ asset('fontend/assets/images/shop/product_img_10.png') }}" alt>
-                            </div>
-                            <div class="details">
-                                <h4>iPad pro</h4>
-                                <p>iPad pro with M1 chipe</p>
-                                <a class="btn btn_primary" href="#">Start Buying</a>
-                            </div>
-                        </div>
-                        <div class="widget audio-widget">
-                            <h5>Audio <span>5</span></h5>
-                            <ul>
-                                <li><a href="#">MI headphone</a></li>
-                                <li><a href="#">Bluetooth AirPods</a></li>
-                                <li><a href="#">Music system</a></li>
-                                <li><a href="#">JBL bar 5.1</a></li>
-                                <li><a href="#">Edifier Computer Speaker</a></li>
-                                <li><a href="#">Macbook pro</a></li>
-                                <li><a href="#">Men's watch</a></li>
-                                <li><a href="#">Washing metchin</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        </form>
+        </div>
+        @endforeach
+
+        </div>
+        </div>
+
+        <div class="top_category_wrap">
+            <div class="sec-title-link">
+                <h3>Top categories</h3>
+            </div>
+            <div class="top_category_carousel2" data-slick='{"dots": false}'>
+                @foreach ($categories as $category)
+                    <div class="slider_item">
+                        <div class="category_boxed">
+                            <a href="#!">
+                                <span class="item_image">
+                                    <img src="{{ asset('uploads/category/') }}/{{ $category->category_image }}"
+                                        alt="image_not_found">
+                                </span>
+                                <span class="item_title">{{ $category->category_name }}</span>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="carousel_nav carousel-nav-top-right">
+                <button type="button" class="tc_left_arrow"><i class="fal fa-long-arrow-alt-left"></i></button>
+                <button type="button" class="tc_right_arrow"><i class="fal fa-long-arrow-alt-right"></i></button>
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-3 order-lg-9">
+            <div class="product-sidebar">
+                <div class="widget latest_product_carousel">
+                    <div class="title_wrap">
+                        <h3 class="area_title">Best Selling Products</h3>
+                        <div class="carousel_nav">
+                            <button type="button" class="vs4i_left_arrow"><i class="fal fa-angle-left"></i></button>
+                            <button type="button" class="vs4i_right_arrow"><i class="fal fa-angle-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="vertical_slider_4item" data-slick='{"dots": false}'>
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_1.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_2.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_3.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_4.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_1.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_2.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_3.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider_item">
+                            <div class="small_product_layout">
+                                <a class="item_image" href="shop_details.html">
+                                    <img src="{{ asset('fontend/assets/images/latest_product/latest_product_4.png') }}"
+                                        alt="image_not_found">
+                                </a>
+                                <div class="item_content">
+                                    <h3 class="item_title">
+                                        <a href="shop_details.html">Product Sample</a>
+                                    </h3>
+                                    <ul class="rating_star ul_li">
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </li>
+                                    </ul>
+                                    <div class="item_price">
+                                        <span>$690.99</span>
+                                        <del>$720.00</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget product-add">
+                    <div class="product-img">
+                        <img src="{{ asset('fontend/assets/images/shop/product_img_10.png') }}" alt>
+                    </div>
+                    <div class="details">
+                        <h4>iPad pro</h4>
+                        <p>iPad pro with M1 chipe</p>
+                        <a class="btn btn_primary" href="#">Start Buying</a>
+                    </div>
+                </div>
+                <div class="widget audio-widget">
+                    <h5>Audio <span>5</span></h5>
+                    <ul>
+                        <li><a href="#">MI headphone</a></li>
+                        <li><a href="#">Bluetooth AirPods</a></li>
+                        <li><a href="#">Music system</a></li>
+                        <li><a href="#">JBL bar 5.1</a></li>
+                        <li><a href="#">Edifier Computer Speaker</a></li>
+                        <li><a href="#">Macbook pro</a></li>
+                        <li><a href="#">Men's watch</a></li>
+                        <li><a href="#">Washing metchin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
         </div> <!-- end container  -->
     </section>
     <!-- products-with-sidebar-section - end ================================================== -->
@@ -1361,11 +1380,14 @@
         $('.input_number_increment').click(function() {
             qty++;
             $('.input_number2').val(qty);
+
             // alert(qty);
             var price = $('#price').html();
             // alert(price);
             var total = price * qty;
             // alert(total);
+
+
             $('#total').html(total);
 
         });
@@ -1384,6 +1406,7 @@
             $('#total').html(total);
 
         });
+
         // get size by color id /product id
         $('#color_id').change(function() {
             var color_id = $('#color_id').val();

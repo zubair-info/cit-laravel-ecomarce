@@ -34,26 +34,31 @@
         }
 
         .brand-section {
-            background-color: #0d1033;
-            padding: 10px 40px;
+            /* background-color: #0d1033; */
+            color: black padding: 10px 40px;
         }
 
         .logo {
             width: 50%;
         }
 
-        .row {
+        /* .row {
             display: flex;
             flex-wrap: wrap;
+        } */
+        .invoice {
+            display: flex;
+            justify-content: space-between;
         }
 
         .col-6 {
-            width: 50%;
-            flex: 0 0 auto;
+            width: 100%;
+            /* flex: 0 0 auto; */
         }
 
         .text-white {
-            color: #fff;
+            /* color: #fff; */
+            color: black
         }
 
         .company-details {
@@ -63,7 +68,7 @@
 
         .body-section {
             padding: 16px;
-            border: 1px solid gray;
+            /* border: 1px solid gray; */
         }
 
         .heading {
@@ -99,7 +104,7 @@
         }
 
         .table-bordered {
-            box-shadow: 0px 0px 5px 0.5px gray;
+            /* box-shadow: 0px 0px 5px 0.5px gray; */
         }
 
         .table-bordered td,
@@ -141,7 +146,7 @@
         </div>
 
         <div class="body-section">
-            <div class="row">
+            <div class="row invoice">
                 <div class="col-6">
                     <h2 class="heading">Invoice No.:{{ $order_id }}</h2>
                     <p class="sub-heading">Tracking No. fabcart2025 </p>

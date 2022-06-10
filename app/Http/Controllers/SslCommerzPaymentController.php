@@ -291,7 +291,7 @@ class SslCommerzPaymentController extends Controller
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
-            echo "Transaction is successfully Completed";
+            echo "Transaction is successfully Completed 5";
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
             echo "Invalid Transaction";
@@ -312,7 +312,7 @@ class SslCommerzPaymentController extends Controller
                 ->update(['status' => 'Failed']);
             echo "Transaction is Falied";
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
+            echo "Transaction is already Successful 4";
         } else {
             echo "Transaction is Invalid";
         }
@@ -332,7 +332,7 @@ class SslCommerzPaymentController extends Controller
                 ->update(['status' => 'Canceled']);
             echo "Transaction is Cancel";
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
+            echo "Transaction is already Successful 3";
         } else {
             echo "Transaction is Invalid";
         }
@@ -364,7 +364,7 @@ class SslCommerzPaymentController extends Controller
                         ->where('transaction_id', $tran_id)
                         ->update(['status' => 'Processing']);
 
-                    echo "Transaction is successfully Completed";
+                    echo "Transaction is successfully Completed 2";
                 } else {
                     /*
                     That means IPN worked, but Transation validation failed.
@@ -380,7 +380,7 @@ class SslCommerzPaymentController extends Controller
 
                 #That means Order status already updated. No need to udate database.
 
-                echo "Transaction is already successfully Completed";
+                echo "Transaction is already successfully Completed 1";
             } else {
                 #That means something wrong happened. You can redirect customer to your product page.
 

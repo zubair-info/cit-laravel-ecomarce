@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\StripePaymentController;
 use App\Models\CustomerLogin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,9 +39,13 @@ Auth::routes();
 // =================================  fontend  ===========================================
 
 Route::get('/', [FontendController::class, 'index'])->name('homepage');
+// single product details page
 Route::get('/product/details/{product_id}', [FontendController::class, 'product_details'])->name('product.details');
 // ajax get size by color
 Route::post('/getSize', [FontendController::class, 'getSize']);
+// product review
+
+Route::post('/product.review', [FontendController::class, 'product_review'])->name('product.review');
 
 // =================================  customer  ===========================================
 
@@ -93,7 +98,10 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 
 
 
+// stripe start
 
+Route::get('stripe', [StripePaymentController::class, 'stripe']);
+Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
 
 // =================================  Admin Dashboard  ======================================
