@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use PDF;
+use App\Models\CustomerPasswordReset;
+use App\Notifications\PassResetNotification;
+use Illuminate\Support\Facades\Notification;
 
 class CustomerController extends Controller
 {
@@ -123,5 +126,43 @@ class CustomerController extends Controller
             'order_id'  => $order_id,
         ]);
         return view('fontend.customer.invoice.invoice', compact('order_id'));
+    }
+
+    // passwod reset
+    public function password_reser_req()
+    {
+        return view('fontend.customer.password_reset');
+    }
+
+    //passord store
+    public function password_reser_store(Request $request)
+    {
+
+        $customer = CustomerLogin::where('email', $request->email)->firstOrfail();
+        $password_reset = CustomerPasswordReset::where('customer_id', $customer->id)->delete();
+        $password_reset = CustomerPasswordReset::create([
+            'customer_id' => $customer->id,
+            'reset_token' => uniqid(),
+            'created_at' => Carbon::now(),
+
+        ]);
+        Notification::send($customer, new PassResetNotification($password_reset));
+        return back()->with('reset_link', 'We has sent password reset link!!');
+    }
+    // email rest form
+    public function password_reser_form($token)
+    {
+        return view('fontend.customer.password_reset_form', compact('token'));
+    }
+
+    public function password_reset_update(Request $request)
+    {
+        $customer_token = CustomerPasswordReset::where('reset_token', $request->reset_token)->firstOrfail();
+        $customer = CustomerLogin::findOrfail($customer_token->customer_id);
+        $customer->update([
+            'password' => Hash::make($request->password),
+        ]);
+        $customer_token->delete();
+        return back()->with('reset_success', 'password reset successfull!!');
     }
 }

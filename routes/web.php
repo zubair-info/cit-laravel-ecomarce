@@ -58,6 +58,10 @@ Route::post('/profile/photo/update', [CustomerController::class, 'picture_update
 Route::post('/customer/password/update', [CustomerController::class, 'password_update']);
 Route::get('/customer/register', [CustomerRegisterController::class, 'customer_register'])->name('customer.register');
 Route::post('/customer/insert', [CustomerRegisterController::class, 'customer_insert']);
+Route::get('/customer/password/reset', [CustomerController::class, 'password_reser_req'])->name('password.reset.req');
+Route::post('/customer/password/store', [CustomerController::class, 'password_reser_store'])->name('password.reset.store');
+Route::get('/customer/password/form/{token}', [CustomerController::class, 'password_reser_form'])->name('password.reset.form');
+Route::post('/customer/password/update', [CustomerController::class, 'password_reset_update'])->name('password.reset.update');
 
 
 // =================================  cart  ===============================================

@@ -42,6 +42,9 @@
                                         <label for="password_input"><i class="fas fa-lock"></i></label>
                                         <input id="password_input" type="password" name="password" placeholder="Password">
                                     </div>
+                                    <div class="checkbox_item">
+                                        <a href="{{ route('password.reset.req') }}">Forgot Your password?</a>
+                                    </div>
                                     {{-- <div class="checkbox_item">
                                         <input id="remember_checkbox" type="checkbox">
                                         <label for="remember_checkbox">Remember Me</label>

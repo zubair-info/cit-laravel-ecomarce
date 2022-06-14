@@ -52,15 +52,17 @@
                     <div class="product_details_content">
                         <h2 class="item_title">{{ $product_info->product_name }}</h2>
                         <p>{{ $product_info->sort_desp }}</p>
+                        @php
+                            $avg = round($total_star / $total_review);
+                        @endphp
                         <div class="item_review">
                             <ul class="rating_star ul_li">
-                                <li><i class="fas fa-star"></i>></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star-half-alt"></i></li>
+                                @for ($i = 1; $i <= $avg; $i++)
+                                    <li><i class="fas fa-star"></i></li>
+                                @endfor
+                                {{-- <li><i class="fas fa-star-half-alt"></i></li> --}}
                             </ul>
-                            <span class="review_value"> 3 Rating(s)</span>
+                            <span class="review_value"> {{ $avg }} Rating(s)</span>
                         </div>
                         <form action="{{ url('/cart/store') }}" method="POST">
                             @csrf
@@ -145,7 +147,7 @@
                     <li>
                         <button data-bs-toggle="tab" data-bs-target="#reviews_tab" type="button" role="tab"
                             aria-controls="reviews_tab" aria-selected="false">
-                            Reviews(2)
+                            Reviews({{ $total_review }})
                         </button>
                     </li>
                 </ul>
@@ -195,13 +197,15 @@
                                 <div class="col-md-12 order-last">
                                     <div class="average_rating_text">
                                         <ul class="rating_star ul_li_center">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
+                                            @for ($i = 1; $i <= $avg; $i++)
+                                                <li><i class="fas fa-star"></i></li>
+                                            @endfor
+
                                         </ul>
                                         <p class="mb-0">
-                                            Average Star Rating: <span>4 out of 5</span> (2 vote)
+                                            Average Star Rating: <span>{{ $avg }} out of
+                                                5</span> ({{ $total_review }}
+                                            vote)
                                         </p>
                                     </div>
                                 </div>
@@ -209,48 +213,31 @@
                         </div>
 
                         <div class="customer_reviews">
-                            <h4 class="reviews_tab_title">2 reviews for this product</h4>
-                            <div class="customer_review_item clearfix">
-                                <div class="customer_image">
-                                    <img src="assets/images/team/team_1.jpg" alt="image_not_found">
-                                </div>
-                                <div class="customer_content">
-                                    <div class="customer_info">
-                                        <ul class="rating_star ul_li">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                        </ul>
-                                        <h4 class="customer_name">Aonathor troet</h4>
-                                        <span class="comment_date">JUNE 2, 2021</span>
+                            <h4 class="reviews_tab_title">{{ $total_review }} reviews for this product</h4>
+                            @foreach ($reviews as $review)
+                                <div class="customer_review_item clearfix">
+                                    <div class="customer_image">
+                                        <img src="{{ asset('/uploads/customer/') }}/{{ $review->rel_to_customer->profile_photo }}"
+                                            alt="image_not_found">
                                     </div>
-                                    <p class="mb-0">Nice Product, I got one in black. Goes with anything!</p>
-                                </div>
-                            </div>
+                                    <div class="customer_content">
+                                        <div class="customer_info">
+                                            <ul class="rating_star ul_li">
+                                                @for ($i = 1; $i <= $review->star; $i++)
+                                                    <li><i class="fas fa-star"></i></li>
+                                                @endfor
 
-                            <div class="customer_review_item clearfix">
-                                <div class="customer_image">
-                                    <img src="assets/images/team/team_2.jpg" alt="image_not_found">
-                                </div>
-                                <div class="customer_content">
-                                    <div class="customer_info">
-                                        <ul class="rating_star ul_li">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star-half-alt"></i></li>
-                                        </ul>
-                                        <h4 class="customer_name">Danial obrain</h4>
-                                        <span class="comment_date">JUNE 2, 2021</span>
+                                            </ul>
+                                            <h4 class="customer_name">{{ $review->rel_to_customer->name }}</h4>
+                                            <span
+                                                class="comment_date">{{ $review->updated_at->format('D-m-Y') }}</span>
+                                        </div>
+                                        <p class="mb-0">{{ $review->review }}</p>
                                     </div>
-                                    <p class="mb-0">
-                                        Great product quality, Great Design and Great Service.
-                                    </p>
                                 </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
                         @auth('customerlogin')
                             @if (App\Models\OrderProduct::where('user_id', Auth::guard('customerlogin')->id())->where('product_id', $product_info->id)->exists())
@@ -258,6 +245,7 @@
                                     <div class="customer_review_form">
                                         <h4 class="reviews_tab_title">Add a review</h4>
                                         <form action="{{ route('product.review') }}" method="post">
+                                            @csrf
                                             <div class="form_item">
                                                 <input type="text" name="name"
                                                     value="{{ Auth::guard('customerlogin')->user()->name }}"
@@ -281,16 +269,22 @@
                                                 <button type="button" class="star" value="5"><i
                                                         class="fal fa-star"></i></button>
                                             </div>
+                                            @error('star')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                             <input type="hidden" name="star" id="star">
                                             <input type="hidden" name="product_id" value="{{ $product_info->id }}">
                                             <div class="form_item">
                                                 <textarea name="review" placeholder="Your Review*"></textarea>
                                             </div>
+                                            @error('review')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                             <button type="submit" class="btn btn_primary">Submit Now</button>
                                         </form>
                                     </div>
                                 @else
-                                    <div class="alert alert-success">You All Ready Reviewed this product</div>
+                                    <div class="alert alert-success col-md-6">You All Ready Reviewed this product</div>
                                 @endif
                             @else
                                 <div class="alert alert-warning col-md-6">You did not purchased this product !!</div>
