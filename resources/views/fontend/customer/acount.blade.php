@@ -33,8 +33,8 @@
                             data-bs-target="#v-pills-profile_password" type="button" role="tab"
                             aria-controls="v-pills-profile_password" aria-selected="false">Password Change</button>
                         <button class="nav-link text-start w-100" id="v-pills-messages-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages"
-                            aria-selected="false">My Orders</button>
+                            data-bs-target="#v-pills-messages" type="button" role="tab"
+                            aria-controls="v-pills-messages" aria-selected="false">My Orders</button>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -87,7 +87,8 @@
                         <div class="tab-pane fade" id="v-pills-profile_picture" role="tabpanel"
                             aria-labelledby="v-pills-profile-tab">
                             <h5 class="text-center pb-3">Profile picture change</h5>
-                            <form action="{{ url('/profile/photo/update') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ url('/profile/photo/update') }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="custom-file mb-4">
@@ -105,7 +106,7 @@
                         <div class="tab-pane fade" id="v-pills-profile_password" role="tabpanel"
                             aria-labelledby="v-pills-profile-tab">
                             <h5 class="text-center pb-3">Password change</h5>
-                            <form action="{{ url('/customer/password/update') }} " method="post">
+                            <form action="{{ route('password.update') }} " method="post">
                                 @csrf
                                 <div class="form-group mb-4">
                                     <label for="old_password" class="form-label">Old Password</label>
@@ -121,7 +122,6 @@
                                     @error('old_password')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-
 
 
                                 </div>

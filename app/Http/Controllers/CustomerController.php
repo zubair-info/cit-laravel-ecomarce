@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Notification;
 
 class CustomerController extends Controller
 {
+
     //
     public function customer_acount()
     {
@@ -72,6 +73,7 @@ class CustomerController extends Controller
     // profile password update
     public  function password_update(Request $request)
     {
+        // echo  $request;
         $request->validate([
             'old_password' => 'required',
             'password' => 'required',
@@ -82,6 +84,7 @@ class CustomerController extends Controller
                 ->numbers()
                 ->symbols(),
             'password' => 'confirmed',
+
 
         ]);
         if (Hash::check($request->old_password, Auth::guard('customerlogin')->user()->password)) {
@@ -110,13 +113,15 @@ class CustomerController extends Controller
     public function download_invoice($order_id)
     {
         // echo $order_id;
+        // return view('fontend.customer.invoice.abc');
+
 
         $pdf = PDF::loadView('fontend.customer.invoice.invoice', [
-            'order_id'  => $order_id,
+            'order_id' => $order_id,
         ]);
 
-        // return $pdf->download('invoice.pdf');
-        return $pdf->stream('invoice.pdf');
+        return $pdf->download('invoice.pdf');
+        // return $pdf->stream('invoice.pdf');
         // return view('fontend.customer.invoice.invoice', compact('order_id'));
     }
 
@@ -134,7 +139,7 @@ class CustomerController extends Controller
         return view('fontend.customer.password_reset');
     }
 
-    //passord store
+    //passord store via email
     public function password_reser_store(Request $request)
     {
 
@@ -155,6 +160,7 @@ class CustomerController extends Controller
         return view('fontend.customer.password_reset_form', compact('token'));
     }
 
+    // password reset via email
     public function password_reset_update(Request $request)
     {
         $customer_token = CustomerPasswordReset::where('reset_token', $request->reset_token)->firstOrfail();

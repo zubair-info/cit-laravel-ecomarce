@@ -16,7 +16,8 @@ class PassResetNotification extends Notification
      *
      * @return void
      */
-    public $data;
+    // public $data;
+    protected $data;
     public function __construct($data)
     {
         //

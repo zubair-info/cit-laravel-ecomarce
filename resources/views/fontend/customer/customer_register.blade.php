@@ -23,16 +23,37 @@
                                 aria-controls="signup_tab" aria-selected="false">Register</button>
                         </li>
                     </ul>
+                    @if (session('email_verify'))
+                        <div class="alert alert-warning">{{ session('email_verify') }}</div>
+                    @endif
+                    @if (session('verified'))
+                        <div class="alert alert-success">{{ session('verified') }}</div>
+                    @endif
+                    @if (session('need_verify'))
+                        <div class="alert alert-warning">{{ session('need_verify') }}</div>
+                    @endif
 
                     <div class="register_wrap tab-content">
+
                         <div class="tab-pane fade show active" id="signin_tab" role="tabpanel">
                             <form action="{{ route('customer.login') }}" method="post">
                                 @csrf
+                                @if (session('wrong_pass'))
+                                    {{-- <strong class="text-danger m-2 text-center"> {{ session('wrong_pass') }} </strong> --}}
+                                    <div class="alert alert-danger">{{ session('wrong_pass') }}</div>
+                                @endif
                                 <div class="form_item_wrap">
                                     <h3 class="input_title">User Email*</h3>
                                     <div class="form_item">
                                         <label for="username_input"><i class="fas fa-user"></i></label>
-                                        <input id="username_input" type="text" name="email" placeholder="User Name">
+                                        <input id="username_input" type="text"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required placeholder="hello@example.com">
+                                        @error('email')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -40,7 +61,14 @@
                                     <h3 class="input_title">Password*</h3>
                                     <div class="form_item">
                                         <label for="password_input"><i class="fas fa-lock"></i></label>
-                                        <input id="password_input" type="password" name="password" placeholder="Password">
+                                        <input id="password_input2" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            required placeholder="Password">
+                                        @error('password')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="checkbox_item">
                                         <a href="{{ route('password.reset.req') }}">Forgot Your password?</a>
@@ -53,6 +81,10 @@
 
                                 <div class="form_item_wrap">
                                     <button type="submit" class="btn btn_primary">Sign In</button>
+                                    <a href="{{ url('/github/redirect') }}" class="btn btn_primary">Sing In With
+                                        Github</a>
+                                    <a href="{{ url('/google/redirect') }}" class="btn btn_primary ">Sing In With
+                                        Google</a>
                                 </div>
                             </form>
                         </div>
@@ -64,14 +96,28 @@
                                     <h3 class="input_title">User Name*</h3>
                                     <div class="form_item">
                                         <label for="username_input2"><i class="fas fa-user"></i></label>
-                                        <input id="username_input2" type="text" name="name" placeholder="User Name">
+                                        <input id="username_input2" type="text"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
+                                            value="{{ old('name') }}" required autofocus placeholder="User name">
+                                        @error('name')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form_item_wrap">
                                     <h3 class="input_title">Email*</h3>
                                     <div class="form_item">
                                         <label for="email_input"><i class="fas fa-envelope"></i></label>
-                                        <input id="email_input" type="email" name="email" placeholder="Email">
+                                        <input id="email_input" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required placeholder="hello@example.com">
+                                        @error('email')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -80,7 +126,14 @@
                                     <h3 class="input_title">Password*</h3>
                                     <div class="form_item">
                                         <label for="password_input2"><i class="fas fa-lock"></i></label>
-                                        <input id="password_input2" type="password" name="password" placeholder="Password">
+                                        <input id="password_input2" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            required placeholder="Password">
+                                        @error('password')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 

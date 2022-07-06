@@ -172,6 +172,9 @@ return [
         // pdf download
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        // permission role spatie
+        Spatie\Permission\PermissionServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

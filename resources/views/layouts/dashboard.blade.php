@@ -59,8 +59,7 @@
 
             <div class="nav-control">
                 <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span
-                        class="line"></span>
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
                 </div>
             </div>
         </div>
@@ -93,10 +92,12 @@
                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
                                         viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1" />
+                                            <rect fill="#000000" x="4" y="11" width="16"
+                                                height="2" rx="1" />
                                             <rect fill="#000000" opacity="0.3"
                                                 transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
-                                                x="4" y="11" width="16" height="2" rx="1" />
+                                                x="4" y="11" width="16" height="2"
+                                                rx="1" />
                                         </g>
                                     </svg></a>
                                 <div>
@@ -120,7 +121,8 @@
                                     <li class="active dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/1.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon"></span>
                                             </div>
                                             <div class="user_info">
@@ -132,7 +134,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/2.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon offline"></span>
                                             </div>
                                             <div class="user_info">
@@ -144,7 +147,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/3.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon"></span>
                                             </div>
                                             <div class="user_info">
@@ -156,7 +160,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/4.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon offline"></span>
                                             </div>
                                             <div class="user_info">
@@ -169,7 +174,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/5.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon offline"></span>
                                             </div>
                                             <div class="user_info">
@@ -181,7 +187,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/1.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon"></span>
                                             </div>
                                             <div class="user_info">
@@ -193,7 +200,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/2.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon offline"></span>
                                             </div>
                                             <div class="user_info">
@@ -206,7 +214,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/3.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon"></span>
                                             </div>
                                             <div class="user_info">
@@ -218,7 +227,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/4.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon offline"></span>
                                             </div>
                                             <div class="user_info">
@@ -231,7 +241,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/5.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/5.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon offline"></span>
                                             </div>
                                             <div class="user_info">
@@ -243,7 +254,8 @@
                                     <li class="dz-chat-user">
                                         <div class="d-flex bd-highlight">
                                             <div class="img_cont">
-                                                <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt="" />
+                                                <img src="images/avatar/1.jpg" class="rounded-circle user_img"
+                                                    alt="" />
                                                 <span class="online_icon"></span>
                                             </div>
                                             <div class="user_info">
@@ -317,7 +329,8 @@
                                             <polygon points="0 0 24 0 24 24 0 24" />
                                             <rect fill="#000000" opacity="0.3"
                                                 transform="translate(15.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-15.000000, -12.000000) "
-                                                x="14" y="7" width="2" height="10" rx="1" />
+                                                x="14" y="7" width="2" height="10"
+                                                rx="1" />
                                             <path
                                                 d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z"
                                                 fill="#000000" fill-rule="nonzero"
@@ -336,9 +349,12 @@
                                             viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24" />
-                                                <circle fill="#000000" cx="5" cy="12" r="2" />
-                                                <circle fill="#000000" cx="12" cy="12" r="2" />
-                                                <circle fill="#000000" cx="19" cy="12" r="2" />
+                                                <circle fill="#000000" cx="5" cy="12"
+                                                    r="2" />
+                                                <circle fill="#000000" cx="12" cy="12"
+                                                    r="2" />
+                                                <circle fill="#000000" cx="19" cy="12"
+                                                    r="2" />
                                             </g>
                                         </svg></a>
                                     <ul class="dropdown-menu dropdown-menu-right">
@@ -370,12 +386,14 @@
                                         <span class="msg_time_send">8:55 AM, Today</span>
                                     </div>
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-start mb-4">
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                     <div class="msg_cotainer">
                                         I am good too, thank you for your chat template
@@ -388,12 +406,14 @@
                                         <span class="msg_time_send">9:05 AM, Today</span>
                                     </div>
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-start mb-4">
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                     <div class="msg_cotainer">
                                         I am looking for your next templates
@@ -406,12 +426,14 @@
                                         <span class="msg_time_send">9:10 AM, Today</span>
                                     </div>
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-start mb-4">
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                     <div class="msg_cotainer">
                                         Bye, see you
@@ -420,7 +442,8 @@
                                 </div>
                                 <div class="d-flex justify-content-start mb-4">
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                     <div class="msg_cotainer">
                                         Hi, how are you samim?
@@ -433,12 +456,14 @@
                                         <span class="msg_time_send">8:55 AM, Today</span>
                                     </div>
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-start mb-4">
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                     <div class="msg_cotainer">
                                         I am good too, thank you for your chat template
@@ -451,12 +476,14 @@
                                         <span class="msg_time_send">9:05 AM, Today</span>
                                     </div>
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-start mb-4">
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                     <div class="msg_cotainer">
                                         I am looking for your next templates
@@ -469,12 +496,14 @@
                                         <span class="msg_time_send">9:10 AM, Today</span>
                                     </div>
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/2.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-start mb-4">
                                     <div class="img_cont_msg">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg" alt="" />
+                                        <img src="images/avatar/1.jpg" class="rounded-circle user_img_msg"
+                                            alt="" />
                                     </div>
                                     <div class="msg_cotainer">
                                         Bye, see you
@@ -578,10 +607,12 @@
                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
                                         viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1" />
+                                            <rect fill="#000000" x="4" y="11" width="16"
+                                                height="2" rx="1" />
                                             <rect fill="#000000" opacity="0.3"
                                                 transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
-                                                x="4" y="11" width="16" height="2" rx="1" />
+                                                x="4" y="11" width="16" height="2"
+                                                rx="1" />
                                         </g>
                                     </svg></a>
                                 <div>
@@ -873,8 +904,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="javascript:void(0)" role="button"
-                                    data-toggle="dropdown">
+                                <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
                                     <img src=" {{ asset('/uploads/users') }}/{{ Auth::user()->profile_photo }} "
                                         width="20" alt="" />
                                     <div class="header-info">
@@ -886,8 +916,9 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href=" {{ route('profile.change') }} " class="dropdown-item ai-icon">
                                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
@@ -895,8 +926,9 @@
                                     </a>
                                     <a href="./email-inbox.html" class="dropdown-item ai-icon">
                                         <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <path
                                                 d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
                                             </path>
@@ -907,11 +939,13 @@
                                     <a href="" {{ route('logout') }}" class="dropdown-item ai-icon"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                             <polyline points="16 17 21 12 16 7"></polyline>
-                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                            <line x1="21" y1="12" x2="9" y2="12">
+                                            </line>
                                         </svg>
                                         <span class="ml-2">{{ __('Logout') }} </span>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -936,9 +970,14 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a href="{{ route('home') }}l" class="ai-icon" aria-expanded="false">
+                    <li><a href="{{ route('home') }}" class="ai-icon" aria-expanded="false">
                             <i class="flaticon-381-networking"></i>
                             <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li><a href="{{ route('role.manager') }}" class="ai-icon" aria-expanded="false">
+                            <i class="flaticon-381-networking"></i>
+                            <span class="nav-text">Role Manager</span>
                         </a>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -946,7 +985,6 @@
                             <span class="nav-text">User</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('user') }}">User List</a></li>
                             <li><a href="{{ route('user') }}">User List</a></li>
 
                         </ul>
@@ -995,6 +1033,8 @@
 
                         </ul>
                     </li>
+
+
 
                 </ul>
 

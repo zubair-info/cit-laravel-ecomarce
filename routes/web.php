@@ -9,8 +9,11 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\CustomerRegisterController;
+use App\Http\Controllers\GithubController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -55,14 +58,17 @@ Route::get('/customer/logout', [CustomerLoginController::class, 'customer_logout
 Route::get('/customer/acount', [CustomerController::class, 'customer_acount'])->name('customer.acount');
 Route::post('/customer/acount/update', [CustomerController::class, 'acount_update']);
 Route::post('/profile/photo/update', [CustomerController::class, 'picture_update']);
-Route::post('/customer/password/update', [CustomerController::class, 'password_update']);
+Route::post('/customer/password/update', [CustomerController::class, 'password_update'])->name('password.update');
 Route::get('/customer/register', [CustomerRegisterController::class, 'customer_register'])->name('customer.register');
 Route::post('/customer/insert', [CustomerRegisterController::class, 'customer_insert']);
+// reset password
 Route::get('/customer/password/reset', [CustomerController::class, 'password_reser_req'])->name('password.reset.req');
 Route::post('/customer/password/store', [CustomerController::class, 'password_reser_store'])->name('password.reset.store');
 Route::get('/customer/password/form/{token}', [CustomerController::class, 'password_reser_form'])->name('password.reset.form');
 Route::post('/customer/password/update', [CustomerController::class, 'password_reset_update'])->name('password.reset.update');
+// email verify
 
+Route::get('/customer/eamil/verify/{token}', [CustomerRegisterController::class, 'customer_email_verify']);
 
 // =================================  cart  ===============================================
 // cart by master page
@@ -107,6 +113,13 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 Route::get('stripe', [StripePaymentController::class, 'stripe']);
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
+// github login
+
+Route::get('/github/redirect', [GithubController::class, 'redirectToProvider']);
+Route::get('/github/callback', [GithubController::class, 'handleToProviderCallback']);
+// google
+Route::get('/google/redirect', [GoogleController::class, 'redirectToProvider']);
+Route::get('/google/callback', [GoogleController::class, 'handleToProviderCallback']);
 
 // =================================  Admin Dashboard  ======================================
 
@@ -185,6 +198,18 @@ Route::get('/inventory/delete/{inventory_id}', [InventoryController::class, 'del
 Route::get('/coupon', [CouponController::class, 'index'])->name('coupon');
 Route::post('/coupon/insert', [CouponController::class, 'insert']);
 Route::get('/coupon/{coupon_id}', [CouponController::class, 'delete'])->name('coupon.delete');
+
+
+// role manager/permission
+Route::get('/role/manager', [RoleController::class, 'role_manager'])->name('role.manager');
+Route::post('/add/permission', [RoleController::class, 'add_permission']);
+Route::post('/add/role', [RoleController::class, 'add_role']);
+Route::post('/assign/role', [RoleController::class, 'assign_role']);
+Route::get('/edit/permissions/{user_id}', [RoleController::class, 'edit_permissions'])->name('edit.permissions');
+Route::post('/update/permission', [RoleController::class, 'update_permission']);
+
+
+
 
 
 // Route::get('/', [FontendController::class, 'welcome']);
