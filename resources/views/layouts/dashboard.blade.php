@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Gymove - Fitness Bootstrap Admin Dashboard</title>
+    <title>Unicorn - Admin Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link rel="stylesheet" href="{{ asset('backend/vendor/chartist/css/chartist.min.css') }}">
@@ -905,6 +905,13 @@
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                                    {{-- @php
+                                        if (App\Models\User::where('id', Auth::id())->exists()) {
+                                            echo 'ok';
+                                        } else {
+                                            echo 'N/A';
+                                        }
+                                    @endphp --}}
                                     <img src=" {{ asset('/uploads/users') }}/{{ Auth::user()->profile_photo }} "
                                         width="20" alt="" />
                                     <div class="header-info">

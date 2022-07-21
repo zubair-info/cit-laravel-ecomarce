@@ -23,6 +23,7 @@
                                 <th>SL</th>
                                 <th>Role Name</th>
                                 <th>Permission</th>
+                                <th>Action</th>
                             </tr>
 
                             @foreach ($roles as $key => $role)
@@ -33,6 +34,11 @@
                                         @foreach ($role->getPermissionNames() as $permissions)
                                             {{ $permissions }},
                                         @endforeach
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('edit.permissions', $role->id) }}"
+                                            class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                class="fa fa-pencil"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -67,20 +73,32 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>
-                                        @foreach ($user->getRoleNames() as $role)
+                                        @forelse ($user->getRoleNames() as $role)
                                             {{ $role }},
-                                        @endforeach
+                                        @empty
+                                            Not Assigned Yet!
+                                        @endforelse
                                     </td>
                                     <td>
-                                        @foreach ($user->getAllPermissions() as $permissions)
+                                        @forelse ($user->getAllPermissions() as $permissions)
                                             {{ $permissions->name }},
-                                        @endforeach
+                                        @empty
+                                            Not Assigned Yet!
+                                        @endforelse
                                     </td>
                                     <td>
 
-                                        <a href="{{ route('edit.permissions', $user->id) }}"
-                                            class="btn btn-primary shadow btn-xs sharp mr-1"><i
-                                                class="fa fa-pencil"></i></a>
+                                        <div class="d-flex">
+                                            <a href="{{ route('edit.role.permissions', $user->id) }}"
+                                                class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                    class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('role.permission', $user->id) }}"
+                                                class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+
+                                            {{-- <button name="{{ route('categorySoft.delete', $category->id) }}"
+                                                type="button" class="delete_btn btn btn-danger shadow btn-xs sharp"><i
+                                                    class="fa fa-trash"></i></button> --}}
+                                        </div>
                                     </td>
 
                                 </tr>

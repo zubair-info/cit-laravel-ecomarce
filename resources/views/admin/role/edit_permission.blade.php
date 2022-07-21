@@ -22,16 +22,16 @@
                             <div class="form-group mb-4">
                                 <label for="" class="form-label">User Name</label>
 
-                                <input type="hidden" name="user_id" value="{{ $user_info->id }}">
+                                <input type="hidden" name="role_id" value="{{ $role_info->id }}">
                                 <input type="text" readonly class="form-control" name="user_name"
-                                    value="{{ $user_info->name }}">
+                                    value="{{ $role_info->name }}">
                             </div>
                             <div class="form-group mb-4">
                                 <label for="" class="form-label">Permission Name</label>
                                 </br>
                                 @foreach ($permissions as $permission)
                                     <input type="checkbox" name="permission[]"
-                                        {{ $user_info->hasPermissionTo($permission->name) ? 'checked' : '' }}
+                                        {{ $role_info->hasPermissionTo($permission->name) ? 'checked' : '' }}
                                         value="{{ $permission->id }}">
                                     {{ $permission->name }} </br>
                                 @endforeach

@@ -39,18 +39,21 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// =================================  fontend  ===========================================
+// =================================  fontend  starts ===========================================
 
 Route::get('/', [FontendController::class, 'index'])->name('homepage');
-// single product details page
+
+
+//====== single product details page=========
 Route::get('/product/details/{product_id}', [FontendController::class, 'product_details'])->name('product.details');
 // ajax get size by color
 Route::post('/getSize', [FontendController::class, 'getSize']);
 // product review
-
 Route::post('/product.review', [FontendController::class, 'product_review'])->name('product.review');
 
-// =================================  customer  ===========================================
+
+
+// ========  customer strats ===========
 
 // customer login
 Route::post('/customer/login', [CustomerLoginController::class, 'customer_login'])->name('customer.login');
@@ -70,7 +73,12 @@ Route::post('/customer/password/update', [CustomerController::class, 'password_r
 
 Route::get('/customer/eamil/verify/{token}', [CustomerRegisterController::class, 'customer_email_verify']);
 
-// =================================  cart  ===============================================
+// ========  customer ends ===========
+
+
+
+
+// ===========  cart starts  ============
 // cart by master page
 Route::post('/cart/store', [CartController::class, 'cart_store']);
 Route::get('/cart/remove/{cart_id}', [CartController::class, 'cart_delete'])->name('cart.remove');
@@ -78,21 +86,28 @@ Route::get('/cart/remove/{cart_id}', [CartController::class, 'cart_delete'])->na
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/getCartId', [CartController::class, 'cart_remove']);
 Route::post('/cart/update', [CartController::class, 'cart_update'])->name('cart.update');
+// ===========  cart ends  ============
 
 
-// =================================  Checkout  ===============================================
+// ==========  Checkout starts =============
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::post('/getState', [CheckoutController::class, 'get_state']);
 Route::post('/getCity', [CheckoutController::class, 'get_city']);
 Route::post('/checkout/insert', [CheckoutController::class, 'checkout_insert'])->name('checkout.insert');
 Route::get('/order/success', [CheckoutController::class, 'order_success'])->name('order.success');
 
-// invoice
+// ==========  Checkout ends =============
+
+
+// ========= invoice starts ==============
 
 Route::get('/order/invoice/{order_id}', [CustomerController::class, 'download_invoice'])->name('download.invoice');
 Route::get('/order/invoiceview/{order_id}', [CustomerController::class, 'view_invoice'])->name('download.invoiceView');
+// ========= invoice ends ==============
 
-// SSLCOMMERZ Start
+
+
+//====== SSLCOMMERZ Start ===========
 Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
 Route::get('/ssl/pay', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
 
@@ -104,7 +119,7 @@ Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
 Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
-//SSLCOMMERZ END
+//======SSLCOMMERZ END ==============
 
 
 
@@ -120,6 +135,12 @@ Route::get('/github/callback', [GithubController::class, 'handleToProviderCallba
 // google
 Route::get('/google/redirect', [GoogleController::class, 'redirectToProvider']);
 Route::get('/google/callback', [GoogleController::class, 'handleToProviderCallback']);
+
+
+// =================================  fontend  ends ===========================================
+
+
+
 
 // =================================  Admin Dashboard  ======================================
 
@@ -205,8 +226,11 @@ Route::get('/role/manager', [RoleController::class, 'role_manager'])->name('role
 Route::post('/add/permission', [RoleController::class, 'add_permission']);
 Route::post('/add/role', [RoleController::class, 'add_role']);
 Route::post('/assign/role', [RoleController::class, 'assign_role']);
-Route::get('/edit/permissions/{user_id}', [RoleController::class, 'edit_permissions'])->name('edit.permissions');
+Route::get('/edit/role/permissions/{user_id}', [RoleController::class, 'edit_role_permissions'])->name('edit.role.permissions');
+Route::get('/edit/permissions/{role_id}', [RoleController::class, 'edit_permissions'])->name('edit.permissions');
+Route::post('/update/role/permission', [RoleController::class, 'update_role_permission']);
 Route::post('/update/permission', [RoleController::class, 'update_permission']);
+Route::get('/role/permission/{user_id}', [RoleController::class, 'role_permission'])->name('role.permission');
 
 
 

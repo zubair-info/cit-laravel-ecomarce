@@ -78,8 +78,8 @@
                                 <tbody>
                                     @foreach ($all_category as $key => $category)
                                         <tr class="{{ $loop->odd ? 'text-danger' : 'text-success' }}">
-                                            <td><input type="checkbox" class="checkAllmark" id="checkAllmark"
-                                                    name="mark[]" value=" {{ $category->id }} "></td>
+                                            <td><input type="checkbox" class="checkAllmark" id="checkAllmark" name="mark[]"
+                                                    value=" {{ $category->id }} "></td>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $category->category_name }}</td>
                                             {{-- <td>{{ $category->user_id }}</td> --}}
