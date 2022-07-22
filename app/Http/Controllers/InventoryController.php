@@ -176,8 +176,8 @@ class InventoryController extends Controller
             'updated_at' => Carbon::now(),
 
         ]);
-        return back();
-        // return redirect()->route('add.inventory')->with('update', 'Inventory Update Successfully!');
+        // return back();
+        return redirect('/product/list')->with('update', 'Inventory Update Successfully!');
     }
     // inventory delete
     public function delete_inventory($inventory_id)

@@ -50,6 +50,8 @@ Route::get('/product/details/{product_id}', [FontendController::class, 'product_
 Route::post('/getSize', [FontendController::class, 'getSize']);
 // product review
 Route::post('/product.review', [FontendController::class, 'product_review'])->name('product.review');
+//shop page
+Route::get('/shop', [FontendController::class, 'shop'])->name('shop');
 
 
 

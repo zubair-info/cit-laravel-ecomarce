@@ -156,27 +156,27 @@
                             </div>
                         </div>
                         <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <form action="#">
-                                <div class="advance_serach">
-                                    <div class="select_option mb-0 clearfix">
-                                        <select class="select">
-                                            <option data-display="All Categories">Select A Category</option>
+                            <div class="advance_serach">
+                                <div class="select_option mb-0 clearfix">
+                                    <select class="select">
+                                        <option data-display="All Categories">Select A Category</option>
 
-                                            @php
-                                                $categories = App\Models\Category::all();
-                                            @endphp
-                                            @foreach ($categories as $category)
-                                                <option value="1">{{ $category->category_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form_item">
-                                        <input type="search" name="search" placeholder="Search Prudcts...">
-                                        <button type="submit" class="search_btn"><i
-                                                class="far fa-search"></i></button>
-                                    </div>
+                                        @php
+                                            $categories = App\Models\Category::all();
+                                        @endphp
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            </form>
+                                <div class="form_item">
+                                    <input type="search" name="search_input" value="{{ @$_GET['q'] }}"
+                                        id="search_input" placeholder="Search Prudcts...">
+                                    <button type="button" id="search_btn" class="search_btn"><i
+                                            class="far fa-search"></i></button>
+                                </div>
+                            </div>
                         </div>
                         <div class="col col-lg-3 col-md-3 col-sm-12">
                             <button class="mobile_menu_btn2 navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -221,10 +221,10 @@
                                 <button class="allcategories_btn" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#allcategories_collapse" aria-expanded="false"
                                     aria-controls="allcategories_collapse">
-                                    <svg role="img" xmlns="http://www.w3.org/2000/svg" width="32px" height="32px"
-                                        viewBox="0 0 24 24" aria-labelledby="statsIconTitle" stroke="#000"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"
-                                        color="#000">
+                                    <svg role="img" xmlns="http://www.w3.org/2000/svg" width="32px"
+                                        height="32px" viewBox="0 0 24 24" aria-labelledby="statsIconTitle"
+                                        stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none" color="#000">
                                         <title id="statsIconTitle">Stats</title>
                                         <path d="M6 7L15 7M6 12L18 12M6 17L12 17" />
                                     </svg>
@@ -257,7 +257,7 @@
                                     <ul class="main_menu_list ul_li">
                                         <li><a class="nav-link" href="{{ route('homepage') }}">Home</a></li>
                                         <li><a class="nav-link" href="#">About us</a></li>
-                                        <li><a class="nav-link" href="#">Shop</a></li>
+                                        <li><a class="nav-link" href="{{route('shop')}}">Shop</a></li>
                                         <li><a class="nav-link" href="#">Contact Us</a></li>
                                     </ul>
                                 </div>
@@ -422,9 +422,11 @@
                                     </div>
                                 </div>
                                 <ul class="store_btns_group ul_li">
-                                    <li><a href="#!"><img src="{{ asset('fontend/assets/images/app_store.png') }}"
+                                    <li><a href="#!"><img
+                                                src="{{ asset('fontend/assets/images/app_store.png') }}"
                                                 alt="app_store"></a></li>
-                                    <li><a href="#!"><img src="{{ asset('fontend/assets/images/play_store.png') }}"
+                                    <li><a href="#!"><img
+                                                src="{{ asset('fontend/assets/images/play_store.png') }}"
                                                 alt="play_store"></a></li>
                                 </ul>
                             </div>

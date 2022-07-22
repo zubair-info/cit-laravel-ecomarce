@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Inventory;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -72,5 +74,57 @@ class FontendController extends Controller
 
         ]);
         return back();
+    }
+
+    // shop pahe
+    public function shop(Request $request)
+    {
+        $data = $request->all();
+
+
+
+        $all_products = Product::where(function ($q) use ($data) {
+            if (!empty($data['q']) && $data['q'] != '' && $data['q'] != 'undefined') {
+                $q->where(function ($q) use ($data) {
+                    $q->where('product_name', 'like', '%' . $data['q'] . '%');
+                    $q->orWhere('sort_desp', 'like', '%' . $data['q'] . '%');
+                });
+            }
+
+            if (!empty($data['category_id']) && $data['category_id'] != '' && $data['category_id'] != 'undefined') {
+                $q->where('category_id', $data['category_id']);
+            }
+            if (!empty($data['amount']) && $data['amount'] != '' && $data['amount'] != 'undefined') {
+                $amount=explode('-',$data['amount']);
+                $q->whereBetween('after_discount', [$amount[0],$amount[1]]);
+            }
+
+
+            if (!empty($data['color_id']) && $data['color_id'] != '' && $data['color_id'] != 'undefined' || !empty($data['size_id']) && $data['size_id'] != '' && $data['size_id'] != 'undefined') {
+                $q->whereHas('rel_to_inventories', function ($q) use ($data) {
+
+                    if (!empty($data['color_id']) && $data['color_id'] != '' && $data['color_id'] != 'undefined') {
+                        $q->whereHas('rel_to_color', function ($q) use ($data) {
+                            $q->where('colors.id', $data['color_id']);
+                        });
+                    }
+
+                    if (!empty($data['size_id']) && $data['size_id'] != '' && $data['size_id'] != 'undifined') {
+                        $q->whereHas('rel_to_size', function ($q) use ($data) {
+                            $q->where('sizes.id', $data['size_id']);
+                        });
+                    }
+                });
+            }
+        })->get();
+        $categoryies = Category::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+        return view('fontend.shop', [
+            'all_products' => $all_products,
+            'categoryies' => $categoryies,
+            'colors' => $colors,
+            'sizes' => $sizes,
+        ]);
     }
 }
